@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Forms exercise</title>
+		<script>
+			document.addEventListener("DOMContentLoaded", assignEvents)
+
+			//Functions
+			function assignEvents() {
+				document.getElementById("lfn").addEventListener("mouseover", showMessageOvInf);
+				document.getElementById("lln").addEventListener("click", showMessageLastClickInf);
+			}
+			function showMessageOvInf() {
+				alert("someone is over me")
+			}
+
+			function showMessageLastClickInf() {
+				alert("someone is clicking me")
+			}
+		</script>
+	</head>
+	<body>
+		<h2>HTML forms</h2>
+		<label for="fname" id="lfn">First name: </label>
+		<input type="text" id="fname" value="John" onkeyup="alert('Something has changed!')"><br>
+
+		<label for="lname" id="lln">Last name: </label>
+		<input type="text" id="lname" value="Doe" onclick="alert('Something has changed!')"><br>
+	</body>
+</html>
