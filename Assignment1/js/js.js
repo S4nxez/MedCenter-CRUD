@@ -1,40 +1,73 @@
-document.getElementById("name").addEventListener("change", validateNumber);
-document.getElementById("email").addEventListener("change", validateNumber);
-document.getElementById("dateofbirth").addEventListener("change", validateNumber); // Agregamos el evento para el campo de fecha
+document.getElementById("name").addEventListener("change", validate_name);
+document.getElementById("email").addEventListener("change", validate_email);
+document.getElementById("password").addEventListener("change", validate_pwd);
+document.getElementById("confirmpassword").addEventListener("change", validate_confirm_pwd);
+document.getElementById("empty").addEventListener("click", empty);
 
-function validateNumber() {
+function validate_name() {
 	const numb = document.getElementById("name");
+	const pNumb = document.getElementById("valMessageN");
+
 	if (!numb.checkValidity()) {
-		document.getElementById("valMessageN").innerHTML = numb.validationMessage;
-		numb.style.backgroundColor = "red";
+		pNumb.innerHTML = numb.validationMessage;
+		pNumb.style.backgroundColor = "red";
 	} else {
-		document.getElementById("valMessageN").innerHTML = null;
-		numb.style.backgroundColor = "white";
-	}
-
-	const email = document.getElementById("email");
-	if (!email.checkValidity()) {
-		document.getElementById("valMessageE").innerHTML = email.validationMessage;
-		email.style.backgroundColor = "red";
-	} else {
-		document.getElementById("valMessageE").innerHTML = null;
-		email.style.backgroundColor = "white";
-	}
-
-	const dob = document.getElementById("dateofbirth");
-	if (!dob.checkValidity()) {
-		document.getElementById("valMessageB").innerHTML = dob.validationMessage;
-		dob.style.backgroundColor = "red";
-	} else {
-		document.getElementById("valMessageB").innerHTML = null;
-		dob.style.backgroundColor = "white";
+		pNumb.innerHTML = null;
+		pNumb.style.backgroundColor = "white";
 	}
 }
 
-// Calculamos la fecha máxima para el campo de fecha (birthday)
+function validate_email() {
+	const email = document.getElementById("email");
+	const pEmail = document.getElementById("valMessageE");
+
+	if (!email.checkValidity()) {
+		pEmail.innerHTML = email.validationMessage;
+		pEmail.style.backgroundColor = "red";
+	} else {
+		pEmail.innerHTML = null;
+		pEmail.style.backgroundColor = "white";
+	}
+}
+
+function validate_pwd() {
+	const pwd = document.getElementById("password");
+	const pPwd = document.getElementById("valMessageP");
+
+	if(!pwd.checkValidity()){
+		pPwd.innerHTML = pwd.validationMessage;
+		pPwd.style.backgroundColor = "red";
+	}else {
+		pPwd.innerHTML = null;
+		pPwd.style.backgroundColor = "white";
+	}
+}
+
+function validate_confirm_pwd(){
+	const pwd = document.getElementById("password").value;
+	const pwdConfirm = document.getElementById("confirmpassword").value;
+	const pPwd = document.getElementById("valMessageC");
+
+	if (pwd !== pwdConfirm){
+		pPwd.innerHTML = "Passwords should match";
+		pPwd.style.backgroundColor = "red";
+	}else {
+		pPwd.innerHTML = "";
+		pPwd.style.backgroundColor = "white";
+	}
+}
+
+function empty(ev) {
+	ev.preventDefault();
+	if (confirm("Do you want to clear the form?"))
+		document.getElementById("miFormulario").reset();
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 	var maxDate = new Date();
+	var maxDateString;
+
 	maxDate.setFullYear(maxDate.getFullYear() - 18);
-	var maxDateString = maxDate.toISOString().slice(0, 10);
+	maxDateString = maxDate.toISOString().slice(0, 10);
 	document.getElementById('dateofbirth').setAttribute('max', maxDateString);
 });
