@@ -3,6 +3,7 @@ document.getElementById("email").addEventListener("change", validate_email);
 document.getElementById("password").addEventListener("change", validate_pwd);
 document.getElementById("confirmpassword").addEventListener("change", validate_confirm_pwd);
 document.getElementById("empty").addEventListener("click", empty);
+document.getElementById("dateofbirth").addEventListener("change", validate_dob)
 document.getElementById("miFormulario").addEventListener("submit", function(event) {
 	const pwd = document.getElementById("password").value;
 	const pwdConfirm = document.getElementById("confirmpassword").value;
@@ -10,7 +11,7 @@ document.getElementById("miFormulario").addEventListener("submit", function(even
 	if (pwd !== pwdConfirm) {
 		event.preventDefault();
 	}
-	});
+});
 
 function validate_name() {
 	const numb = document.getElementById("name");
@@ -28,9 +29,10 @@ function validate_name() {
 function validate_email() {
 	const email = document.getElementById("email");
 	const pEmail = document.getElementById("valMessageE");
+	const pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-	if (!email.checkValidity()) {
-		pEmail.innerHTML = email.validationMessage;
+	if (!pattern.test(email.value)) {
+		pEmail.innerHTML = "Please enter a valid email address.";
 		pEmail.style.backgroundColor = "red";
 	} else {
 		pEmail.innerHTML = null;
@@ -81,11 +83,23 @@ function empty(ev) {
 		document.getElementById("miFormulario").reset();
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-	var maxDate = new Date();
-	var maxDateString;
+function validate_dob() {
+	const dob = document.getElementById("dateofbirth");
+	const pDob = document.getElementById("valMessageB");
+	const selectedDate = new Date(dob.value);
+	const currentDate = new Date();
 
-	maxDate.setFullYear(maxDate.getFullYear() - 18);
-	maxDateString = maxDate.toISOString().slice(0, 10);
-	document.getElementById('dateofbirth').setAttribute('max', maxDateString);
-});
+	let age = currentDate.getFullYear() - selectedDate.getFullYear();
+	const m = currentDate.getMonth() - selectedDate.getMonth();
+	if (m < 0 || (m === 0 && currentDate.getDate() < selectedDate.getDate())) {
+		age--;
+	}
+
+	if (age < 18) {
+		pDob.innerHTML = "You must be at least 18 years old.";
+		pDob.style.backgroundColor = "red";
+	} else {
+		pDob.innerHTML = null;
+		pDob.style.backgroundColor = "white";
+	}
+}
