@@ -1,4 +1,4 @@
-document.getElementById("add1").addEventListener("click", addPatient);
+document.getElementById("add1").addEventListener("click", addPatientModal);
 getAllPatients()
 
 function getAllPatients() {
@@ -36,5 +36,7 @@ function createPatientRow(patient) {
 	return row;
 }
 
-function addPatient() {
+function addPatientModal() {
+	let addPatientModal = new bootstrap.Modal(document.getElementById('addPatientModal'));
+	addPatientModal.show();
 }

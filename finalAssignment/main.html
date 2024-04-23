@@ -28,9 +28,30 @@
 			</tr>
 		</thead>
 		<tbody id="patientTableBody">
-			
 		</tbody>
 		</table>
+
+		<div class="modal" id="addPatientModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h5 class="modal-title" id="addPatientModalLabel">Add new patient</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="mb-3">
+						<label for="addPatientName" class="form-label">Patient name</label>
+						<input type="text" class="form-control" id="addPatientName" required>
+					</div>
+				</div>
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button class="btn btn-primary">Add patient</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	</body>
 	</html>
