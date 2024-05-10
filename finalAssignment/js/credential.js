@@ -27,5 +27,5 @@ function credentials (){
 			console.error("wrong credentials")
 		}
 	})
-	.catch(error =>	console.error ("Error in the fetch:", error))
+	.catch(error =>	console.error("Error in the fetch:", error))
 }
