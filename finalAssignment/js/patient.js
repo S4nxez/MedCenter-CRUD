@@ -1,4 +1,4 @@
-document.getElementById("add1").addEventListener("click", addPatientModal);
+document.getElementById("add1").addEventListener("click", showAddPatientModal);
 getAllPatients()
 
 function getAllPatients() {
@@ -28,13 +28,14 @@ function createPatientRow(patient) {
 		"<td><button class='btn btn-danger btn-sm' >Delete</button></td>" +
 		"<td><button class='btn btn-primary btn-sm ms-2' >Update</button></td>";
 
-
+		row.querySelector(".btn-info").addEventListener("click", getInfo);
 		row.querySelector(".btn-primary").addEventListener("click", showUpdatePatientModal);
 		row.querySelector(".btn-danger").addEventListener("click", deletePatient);
 		return row;
 }
 
-function addPatientModal() {
+function showAddPatientModal() {
+	document.getElementById("addPatientButton").addEventListener("click", addPatient);
 	let addPatientModal = new bootstrap.Modal(document.getElementById('addPatientModal'));
 	addPatientModal.show();
 }
