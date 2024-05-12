@@ -24,7 +24,7 @@ function credentials (){
 		if (data == true) {
 			window.location.href = "main.html"
 		} else {
-			console.error("wrong credentials")
+			document.getElementById("wrongCredentials").textContent = "Wrong credentials. Please try again.";
 		}
 	})
 	.catch(error =>	console.error("Error in the fetch:", error))

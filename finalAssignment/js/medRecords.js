@@ -42,15 +42,103 @@ function createMedRecordRow(medRecord) {
 	"<td>" + medRecord.medications +"</td>" +
 	"<td><button class='btn btn-danger btn-sm' >Delete</button></td>" +
 	"<td><button class='btn btn-primary btn-sm ms-2' >Update</button></td>";
+	let deleteButton = row.querySelector(".btn-danger");
+	deleteButton.addEventListener("click", function () { deleteMedRecord(medRecord, row) });
+	let updateButton = row.querySelector(".btn-primary");
+	updateButton.addEventListener("click", function(event) {showUpdateMedModal(event)});
+
 	return row;
+}
+
+function showUpdateMedModal(event) {
+	let row = event.target.parentNode.parentNode;
+	let cells = row.getElementsByTagName("td");
+	let id = cells[0].innerText;
+	let diagnosis = cells[1].innerText;
+	let date = cells[2].innerText;
+	//Fill combo with doctors
+	fillDoctors("updateMedRecordDoctor");
+	//Fill list with medications
+	fillMedications("updateMedRecordMeds");
+
+	document.getElementById("updateMedRecordId").value=id;
+	document.getElementById("updateMedRecordDesc").value=diagnosis;
+	document.getElementById("updateMedRecordDate").value=date;
+	document.getElementById("updateMRB").addEventListener("click", function() {updateMedRecord(row)});
+
+	let updateMedRecordModal = new bootstrap.Modal(document.getElementById('updateMedRecordModal'))
+	updateMedRecordModal.show();
+}
+
+function updateMedRecord(row) {
+	let medRecId = document.getElementById("updateMedRecordId").value;
+	let diagnosis = document.getElementById("updateMedRecordDesc").value;
+	let parsedDate=new Date(document.getElementById("updateMedRecordDate").value);
+	let formattedDate=parsedDate.toISOString().split('T')[0];
+	let idDoctor= document.getElementById("updateMedRecordDoctor").value;
+	let selectedMed = getSelectMeds("updateMedRecordMeds");
+
+	let medRecord = {
+		id: 0,
+		description: diagnosis,
+		date: formattedDate,
+		idDoctor: Number(idDoctor),
+		medications: selectedMed
+	}
+	fetch ("https://informatica.iesquevedo.es/marcas/patients/medRecords", { // ---------------------------------------------------------CONTINUAR POR AQUI
+		method: 'PUT',
+		headers: {
+			'Content-Type' : 'application/json'
+		},
+		body: JSON.stringify(medRecord)
+	})
+	.then (response => {
+		if(!response.ok) {
+			throw new Error('Network response is not ok');
+		}
+		return response.json()
+	}).then (data => {
+		console.log('MedRecord updated succesfully ' + data)
+		$('#updateMedRecordModal').modal('hide');
+		//modify data
+		row.cells[1].innerText=medRecord.description;
+		row.cells[2].innerText=medRecord.date;
+		row.cells[3].innerText=medRecord.idDoctor;
+		row.cells[4].innerText=medRecord.medications;
+	})
+	.catch (error => {
+		console.error("Error in the fetch:", error)
+	})
+}
+
+function deleteMedRecord(medRecord, row) {
+	fetch (`https://informatica.iesquevedo.es/marcas/patients/medRecords/${medRecord.id}?confirm=true`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type' : 'application/json'
+		}
+	})
+	.then (response => {
+		if (!response.ok) {
+			throw new Error ('Network response is not ok');
+		}
+		return response.json()
+	})
+	.then(data => {
+		console.log("MedRecord deleted succesfully: ", data);
+		row.parentNode.removeChild(row);
+	})
+	.catch (error => {
+		console.error('Error deleting MedRecord: ', error);
+	});
 }
 
 function showAddMedRecordModal() {
 	document.getElementById("addMRB").addEventListener("click", addMedRecord);
 	//Fill combo with doctors
-	fillDoctors();
+	fillDoctors("addMedRecordDoctor");
 	//Fill list with medications
-	fillMedications();
+	fillMedications("addMedRecordMeds");
 	let addMedRecordModal = new bootstrap.Modal(document.getElementById('addMedRecordModal'));
 
 	addMedRecordModal.show();
@@ -83,9 +171,10 @@ function addMedRecord() {
 		}
 		return response.json()
 	}).then (data => {
-		let tableBody=document.getElementById("medRecordTable");
+		let table=document.getElementById("medRecordTable");
 		let row=createMedRecordRow(data);
-		tableBody.appendChild(row);
+		let medRTableBody = table.querySelector("tbody");
+		medRTableBody.appendChild(row);
 		$('#addMedRecordModal').modal('hide')
 	}).catch (error => {
 		console.error("Error in the fetch:", error)
@@ -93,7 +182,7 @@ function addMedRecord() {
 }
 
 
-function fillDoctors() {
+function fillDoctors(elementId) {
 	fetch ("https://informatica.iesquevedo.es/marcas/doctors")
 	.then (response => {
 		if (!response.ok) {
@@ -102,7 +191,7 @@ function fillDoctors() {
 		return response.json()
 	})
 	.then(data => {
-		let comboD=document.getElementById("addMedRecordDoctor");
+		let comboD=document.getElementById(elementId);
 		comboD.innerHTML='';
 		data.forEach(doctor => {
 			let option=document.createElement("option");
@@ -116,8 +205,9 @@ function fillDoctors() {
 	});
 }
 
-function fillMedications() {
-	let comboM = document.getElementById("addMedRecordMeds");
+function fillMedications(meds) {
+	let comboM = document.getElementById(meds);
+	comboM.innerHTML='';
 	let option = document.createElement("option");
 	option.textContent="Ibuprofen";
 	option.value = 1;
@@ -137,7 +227,7 @@ function fillMedications() {
 }
 
 function getSelectMeds(medsSelect) {
-	let medsList=document.getElementById("addMedRecordMeds");
+	let medsList=document.getElementById(medsSelect);
 	let meds=[];
 	for(let i = 0; i < medsList.options.length; i++) {
 		let option=medsList.options[i];

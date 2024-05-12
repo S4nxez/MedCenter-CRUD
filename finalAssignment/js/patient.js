@@ -42,12 +42,12 @@ function showAddPatientModal() {
 
 function addPatient() {
 	let patientName=document.getElementById("addPatientName").value;
-	//let patientPhone=document.getElementById("addPatientPhone").value;
+	let patientPhone=document.getElementById("addPatientPhone").value;
 
 	let patient= {
 		id:0,
 		name: patientName,
-		//phone: patientPhone
+		phone: patientPhone
 	};
 
 	fetch ("https://informatica.iesquevedo.es/marcas/patients", {
@@ -67,6 +67,7 @@ function addPatient() {
 			tableBody.appendChild(row);
 			$('#addPatientModal').modal('hide')
 			document.getElementById("addPatientName").value = "";
+			document.getElementById("addPatientPhone").value = "";
 		}).catch (error => {
 			console.error("Error in the fetch:", error)
 		})
@@ -77,22 +78,24 @@ function showUpdatePatientModal(event) {
 	let cells = row.getElementsByTagName("td");
 	let id = cells[0].innerText;
 	let name = cells[1].innerText;
+	let phone = cells[2].innerText;
 	document.getElementById("updatePatientId").value=id;
 	document.getElementById("updatePatientName").value=name;
+	document.getElementById("updatePatientPhone").value=phone;
 	document.getElementById("updatePatientButton").addEventListener("click", function() {updatePatient(row)});
 	let updatePatientModal = new bootstrap.Modal(document.getElementById('updatePatientModal'))
 	updatePatientModal.show();
-
 }
 
 function updatePatient(row) {
 	let patientId = document.getElementById("updatePatientId").value;
 	let patientName = document.getElementById("updatePatientName").value;
+	let patientPhone = document.getElementById("updatePatientPhone").value;
 
 	let patient = {
 		id: patientId,
 		name: patientName,
-		phone: patientName
+		phone: patientPhone
 	}
 	fetch ("https://informatica.iesquevedo.es/marcas/patients", {
 		method: 'PUT',
@@ -136,9 +139,9 @@ function deletePatient(event) {
 	})
 	.then(data => {
 		console.log("patient deleted succesfully: ", data);
-		document.getElementById("patientTableBody").removeChild(row)
+		document.getElementById("patientTableBody").removeChild(row);
 	})
 	.catch (error => {
-		console.error('Error updating patient: ', error);
+		console.error('Error deleting patient: ', error);
 	});
 }

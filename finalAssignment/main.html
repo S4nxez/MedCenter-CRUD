@@ -46,6 +46,10 @@
 							<label for="addPatientName" class="form-label">Patient name</label>
 							<input type="text" class="form-control" id="addPatientName" required>
 						</div>
+						<div class="mb-3">
+							<label for="addPatientPhone" class="form-label">Patient phone</label>
+							<input type="tel" class="form-control" id="addPatientPhone" required>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-primary" id="addPatientButton">Add patient</button>
@@ -69,6 +73,10 @@
 						<div class="mb-3">
 							<label for="updatePatientName" class="form-label">Patient name</label>
 							<input type="text" class="form-control" id="updatePatientName" required>
+						</div>
+						<div class="mb-3">
+							<label for="updatePatientPhone" class="form-label">Patient phone</label>
+							<input type="tel" class="form-control" id="updatePatientPhone" required>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -107,6 +115,42 @@
 						</div>
 
 						<button id="addMRB" class="btn btn-primary">Add MedRecord</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal for updateMedRecord -->
+		<div class="modal" id="updateMedRecordModal" tabindex="-1" aria-labelledby="UpdateMedRecordModalLabel"
+		aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="updateMedRecordModalLabel">Update MedRecord</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="mb-3">
+							<label for="updateMedRecordId" class="form-label">MedRecord Id</label>
+							<input type="text" class="form-control" id="updateMedRecordId" readonly>
+						</div>
+						<div class="mb-3">
+							<label for="updateMedRecordDesc" class="form-label">MedRecord diagnosis</label>
+							<input type="text" class="form-control" id="updateMedRecordDesc" required>
+						</div>
+						<div class="mb-3">
+							<label for="updateMedRecordDate" class="form-label">MedRecord date</label>
+							<input type="date" class="form-control" id="updateMedRecordDate" required>
+						</div>
+						<div class="mb-3">
+							<label for="updateMedRecordDoctor" class="form-label">Doctor</label>
+							<select class="form-select" id="updateMedRecordDoctor" required></select>
+						</div>
+						<div class="mb-3">
+							<label for="updateMedRecordMeds" class="form-label">Medications</label>
+							<select class="form-select" id="updateMedRecordMeds" multiple></select>
+						</div>
+
+						<button id="updateMRB" class="btn btn-primary">Add MedRecord</button>
 					</div>
 				</div>
 			</div>
