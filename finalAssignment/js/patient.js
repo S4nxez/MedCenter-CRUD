@@ -1,5 +1,5 @@
 document.getElementById("add1").addEventListener("click", showAddPatientModal);
-getAllPatients()
+getAllPatients();
 
 function getAllPatients() {
 	fetch ("https://informatica.iesquevedo.es/marcas/patients")
@@ -12,15 +12,14 @@ function getAllPatients() {
 			let tableBody = document.getElementById("patientTableBody");
 
 			data.forEach(patient => {
-				let row = createPatientRow(patient);
-				tableBody.appendChild(row);
+				tableBody.appendChild(createPatientRow(patient));
 			})
 		})
 		.catch(error => console.error("Error in the fetch: ", error))
 }
 
 function createPatientRow(patient) {
-	var row = document.createElement("tr");
+	let row = document.createElement("tr");
 	row.innerHTML =	"<td>" + patient.id +"</td>" +
 		"<td>" + patient.name +"</td>" +
 		"<td>" + patient.phone +"</td>" +
@@ -75,16 +74,25 @@ function addPatient() {
 
 function showUpdatePatientModal(event) {
 	let row = event.target.parentNode.parentNode;
+
 	let cells = row.getElementsByTagName("td");
 	let id = cells[0].innerText;
 	let name = cells[1].innerText;
 	let phone = cells[2].innerText;
+
 	document.getElementById("updatePatientId").value=id;
 	document.getElementById("updatePatientName").value=name;
 	document.getElementById("updatePatientPhone").value=phone;
-	document.getElementById("updatePatientButton").addEventListener("click", function() {updatePatient(row)});
+	let updateButton = document.getElementById("updatePatientButton");
+	updateButton.addEventListener("click", handleUpdatePatient);
+
 	let updatePatientModal = new bootstrap.Modal(document.getElementById('updatePatientModal'))
 	updatePatientModal.show();
+
+	function handleUpdatePatient() {
+		updateButton.removeEventListener("click", handleUpdatePatient);
+		updatePatient(row);
+	}
 }
 
 function updatePatient(row) {

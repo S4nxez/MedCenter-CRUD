@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bootstrap Third Exercise</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="Scripts/formValidation.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="d-none d-sm-block border-bottom border-primary"><span class="text-primary">Form exercise with
+            </span>Bootstrap</h1>
+
+        <form action="https://jkorpela.fi/cgi-bin/echo.cgi" method="post" id="form">
+            <div class="row mt-3 mb-3">
+                <label class="form-label col-sm-2 fw-bold" for="name">Name*:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Your name" required>
+                </div>
+                <label class="form-label col-4" id="nameErrorLabel"></label>
+            </div>
+            <div class="row mt-3 mb-3">
+                <label class="form-label col-sm-2 fw-bold" for="surname">Surname*:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="surname" name="surname" placeholder="Your surname"
+                        required>
+                </div>
+                <label class="form-label col-4" id="surnameErrorLabel"></label>
+            </div>
+            <div class="row mt-3 mb-3">
+                <label class="form-label col-sm-2 fw-bold" for="address">Address:</label>
+                <div class="col-sm-4">
+                    <textarea class="form-control" id="address" name="address" placeholder="Your address"
+                        rows="5"></textarea>
+                </div>
+                <label class="form-label col-4" id="addressErrorLabel"></label>
+
+            </div>
+            <div class="row mt-3 mb-3">
+                <label class="form-label col-sm-2 fw-bold" for="email">Username*:</label>
+                <div class="col-sm-4 input-group">
+                    <span class="input-group-text" id="addon-wrapping">@</span>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Your email" required>
+                    <label class="form-label col-6" id="emailErrorLabel"></label>
+                </div>
+
+            </div>
+            <div class="row mt-3 mb-3">
+                <label class="form-label col-sm-2 fw-bold" for="password">Password*:</label>
+                <div class="col-sm-2">
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <label class="form-label col-4" id="passwordErrorLabel"></label>
+            </div>
+            <div class="row mt-3 mb-3">
+                <label class="form-label col-sm-2 fw-bold" for="confirmPassword">Confirm password*:</label>
+                <div class="col-sm-2">
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <label class="form-label col-4" id="confirmPasswordErrorLabel"></label>
+            </div>
+            <div class="mt-3 mb-3">
+                <div class="col-sm-2">
+                    <label class="form-label fw-bold" for="dateofbirth">Date of birth:</label>
+                    <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth">
+                </div>
+                <label class="form-label col-4" id="dateErrorLabel"></label>
+
+                <div class="row mt-3 mb-3">
+                    <label class="form-label col-2 fw-bold">Gender:</label>
+                    <div class="col-2 form-check">
+                        <input type="radio" class="form-check-input" id="male" name="gender" value="male" checked>
+                        <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="col-2 form-check">
+                        <input type="radio" class="form-check-input" id="female" name="gender" value="female">
+                        <label class="form-check-label" for="female">Female</label>
+                    </div>
+                </div>
+                <div class="row mt-3 mb-3">
+                    <div class="offset-sm-3 col-sm-9">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="newsletter" name="newsletter" checked>
+                            <label class="form-check-label" for="newsletter">Receive newsletter</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="terms" name="terms" required autofocus>
+                            <label class="form-check-label" for="termsofservice">I agree to <a href="terms.pdf">terms of
+                                    service</a></label>
+                        </div>
+                        <label class="form-label col-4" id="termsErrorLabel"></label>
+                    </div>
+                </div>
+                <div class="row mt-3 mb-3">
+                    <div class="col-sm-9 offset-sm-3">
+                        <button type="submit" id="submitButton" class="btn btn-primary">Submit</button>
+                        <button type="reset" id="resetButton" class="btn btn-outline-secondary">Reset</button>
+                    </div>
+                </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

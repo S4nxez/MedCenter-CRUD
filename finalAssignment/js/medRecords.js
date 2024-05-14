@@ -85,7 +85,7 @@ function updateMedRecord(row) {
 		idDoctor: Number(idDoctor),
 		medications: selectedMed
 	}
-	fetch ("https://informatica.iesquevedo.es/marcas/patients/medRecords", { // ---------------------------------------------------------CONTINUAR POR AQUI
+	fetch ("https://informatica.iesquevedo.es/marcas/patients/medRecords", {
 		method: 'PUT',
 		headers: {
 			'Content-Type' : 'application/json'
