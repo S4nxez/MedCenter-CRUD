@@ -52,10 +52,12 @@ function createMedRecordRow(medRecord) {
 
 function showUpdateMedModal(event) {
 	let row = event.target.parentNode.parentNode;
+
 	let cells = row.getElementsByTagName("td");
 	let id = cells[0].innerText;
 	let diagnosis = cells[1].innerText;
 	let date = cells[2].innerText;
+
 	//Fill combo with doctors
 	fillDoctors("updateMedRecordDoctor");
 	//Fill list with medications
@@ -64,6 +66,8 @@ function showUpdateMedModal(event) {
 	document.getElementById("updateMedRecordId").value=id;
 	document.getElementById("updateMedRecordDesc").value=diagnosis;
 	document.getElementById("updateMedRecordDate").value=date;
+
+	let updateButton = document.getElementById("update");
 	document.getElementById("updateMRB").addEventListener("click", function() {updateMedRecord(row)});
 
 	let updateMedRecordModal = new bootstrap.Modal(document.getElementById('updateMedRecordModal'))
