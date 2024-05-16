@@ -1,5 +1,5 @@
 document.getElementById("add1").addEventListener("click", showAddPatientModal);
-getAllPatients();
+getAllPatients()
 
 function getAllPatients() {
 	fetch ("https://informatica.iesquevedo.es/marcas/patients")
@@ -12,14 +12,15 @@ function getAllPatients() {
 			let tableBody = document.getElementById("patientTableBody");
 
 			data.forEach(patient => {
-				tableBody.appendChild(createPatientRow(patient));
+				let row = createPatientRow(patient);
+				tableBody.appendChild(row);
 			})
 		})
 		.catch(error => console.error("Error in the fetch: ", error))
 }
 
 function createPatientRow(patient) {
-	let row = document.createElement("tr");
+	var row = document.createElement("tr");
 	row.innerHTML =	"<td>" + patient.id +"</td>" +
 		"<td>" + patient.name +"</td>" +
 		"<td>" + patient.phone +"</td>" +

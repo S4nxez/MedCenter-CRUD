@@ -22,6 +22,7 @@ function getInfo(event){
 		//second row
 		medRTable.innerHTML +="<tr><th>ID</th><th>Diagnosis</th><th>Date</th><th>Doctor</th><th>Medications</th><th>Action</th><th>Action</th></tr></thead></tbody>"
 		let medRTableBody = medRTable.querySelector("tbody");
+		medRTable.setAttribute("patientIdV", patientId);
 		data.forEach(medRecord => {
 			let medRecordRow = createMedRecordRow(medRecord);
 			medRTableBody.appendChild(medRecordRow);
@@ -58,34 +59,43 @@ function showUpdateMedModal(event) {
 	let diagnosis = cells[1].innerText;
 	let date = cells[2].innerText;
 
+	let patientId	= document.getElementById("medRecordTable").getAttribute("patientIdV");
 	//Fill combo with doctors
 	fillDoctors("updateMedRecordDoctor");
 	//Fill list with medications
 	fillMedications("updateMedRecordMeds");
 
+
+	document.getElementById("updateMedRecordPatientId").value=patientId; 	
 	document.getElementById("updateMedRecordId").value=id;
 	document.getElementById("updateMedRecordDesc").value=diagnosis;
 	document.getElementById("updateMedRecordDate").value=date;
 
-	let updateButton = document.getElementById("update");
-	document.getElementById("updateMRB").addEventListener("click", function() {updateMedRecord(row)});
+	let updateButton = document.getElementById("updateMRB");
+	updateButton.addEventListener("click", handleUpdateMedRec);
 
 	let updateMedRecordModal = new bootstrap.Modal(document.getElementById('updateMedRecordModal'))
 	updateMedRecordModal.show();
+
+	function handleUpdateMedRec() {
+		updateButton.removeEventListener("click", handleUpdateMedRec);
+		updateMedRecord(row)
+	}
 }
 
 function updateMedRecord(row) {
-	let medRecId = document.getElementById("updateMedRecordId").value;
-	let diagnosis = document.getElementById("updateMedRecordDesc").value;
-	let parsedDate=new Date(document.getElementById("updateMedRecordDate").value);
-	let formattedDate=parsedDate.toISOString().split('T')[0];
-	let idDoctor= document.getElementById("updateMedRecordDoctor").value;
+	let patientId	= document.getElementById("medRecordTable").getAttribute("patientIdV");
+	let diagnosis	= document.getElementById("updateMedRecordDesc").value;
+	let parsedDate	=new Date(document.getElementById("updateMedRecordDate").value);
+	let idDoctor	= document.getElementById("updateMedRecordDoctor").value;
 	let selectedMed = getSelectMeds("updateMedRecordMeds");
-
+	let formattedDate=parsedDate.toISOString().split('T')[0];
+	console.log(patientId);
 	let medRecord = {
 		id: 0,
 		description: diagnosis,
 		date: formattedDate,
+		idPatient: patientId,
 		idDoctor: Number(idDoctor),
 		medications: selectedMed
 	}
@@ -102,6 +112,7 @@ function updateMedRecord(row) {
 		}
 		return response.json()
 	}).then (data => {
+		//console.log(medRecord) // test
 		console.log('MedRecord updated succesfully ' + data)
 		$('#updateMedRecordModal').modal('hide');
 		//modify data
@@ -116,7 +127,7 @@ function updateMedRecord(row) {
 }
 
 function deleteMedRecord(medRecord, row) {
-	fetch (`https://informatica.iesquevedo.es/marcas/patients/medRecords/${medRecord.id}?confirm=true`, {
+	fetch (`https://informatica.iesquevedo.es/marcas/patients/medRecords/${medRecord.id}`, {
 		method: 'DELETE',
 		headers: {
 			'Content-Type' : 'application/json'
