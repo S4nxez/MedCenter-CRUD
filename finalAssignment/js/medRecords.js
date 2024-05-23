@@ -66,7 +66,7 @@ function showUpdateMedModal(event) {
 	fillMedications("updateMedRecordMeds");
 
 
-	document.getElementById("updateMedRecordPatientId").value=patientId; 	
+	document.getElementById("updateMedRecordPatientId").value=patientId;
 	document.getElementById("updateMedRecordId").value=id;
 	document.getElementById("updateMedRecordDesc").value=diagnosis;
 	document.getElementById("updateMedRecordDate").value=date;
@@ -84,6 +84,7 @@ function showUpdateMedModal(event) {
 }
 
 function updateMedRecord(row) {
+	let medRecordId = document.getElementById("updateMedRecordId").value;
 	let patientId	= document.getElementById("medRecordTable").getAttribute("patientIdV");
 	let diagnosis	= document.getElementById("updateMedRecordDesc").value;
 	let parsedDate	=new Date(document.getElementById("updateMedRecordDate").value);
@@ -92,7 +93,7 @@ function updateMedRecord(row) {
 	let formattedDate=parsedDate.toISOString().split('T')[0];
 	console.log(patientId);
 	let medRecord = {
-		id: 0,
+		id: medRecordId,
 		description: diagnosis,
 		date: formattedDate,
 		idPatient: patientId,
