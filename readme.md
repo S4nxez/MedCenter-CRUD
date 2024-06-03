@@ -20,7 +20,7 @@ This repository was created as part of a class to demonstrate my learning progre
 
 The repository is organized into the following folders:
 
-- **reviewExercises**: Contains basic JavaScript exercises for review purposes.
+- **SpringBootMeds**: Contains the server.
 - **finalAssignment**: Contains the final project which is more complex and feature-rich.
 
 ## Review Exercises
