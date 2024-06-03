@@ -84,12 +84,12 @@ function showUpdateMedModal(event) {
 }
 
 function updateMedRecord(row) {
-	let medRecordId = document.getElementById("updateMedRecordId").value;
+	let medRecordId	= document.getElementById("updateMedRecordId").value;
 	let patientId	= document.getElementById("medRecordTable").getAttribute("patientIdV");
 	let diagnosis	= document.getElementById("updateMedRecordDesc").value;
-	let parsedDate	=new Date(document.getElementById("updateMedRecordDate").value);
+	let parsedDate	= new Date(document.getElementById("updateMedRecordDate").value);
 	let idDoctor	= document.getElementById("updateMedRecordDoctor").value;
-	let selectedMed = getSelectMeds("updateMedRecordMeds");
+	let selectedMed	= getSelectMeds("updateMedRecordMeds");
 	let formattedDate=parsedDate.toISOString().split('T')[0];
 	console.log(patientId);
 	let medRecord = {

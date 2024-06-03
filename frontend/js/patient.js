@@ -2,7 +2,7 @@ document.getElementById("add1").addEventListener("click", showAddPatientModal);
 getAllPatients()
 
 function getAllPatients() {
-	fetch ("https://informatica.iesquevedo.es/marcas/patients")
+	fetch ("http://localhost:8080/api/v1/Patient")
 		.then (response => {
 			if (!response.ok)
 				throw new Error ('Network response is not ok')
@@ -45,12 +45,11 @@ function addPatient() {
 	let patientPhone=document.getElementById("addPatientPhone").value;
 
 	let patient= {
-		id:0,
 		name: patientName,
 		phone: patientPhone
 	};
 
-	fetch ("https://informatica.iesquevedo.es/marcas/patients", {
+	fetch ("http://localhost:8080/api/v1/Patient", {
 		method: 'POST',
 		headers: {
 			'Content-Type' : 'application/json'
@@ -106,7 +105,7 @@ function updatePatient(row) {
 		name: patientName,
 		phone: patientPhone
 	}
-	fetch ("https://informatica.iesquevedo.es/marcas/patients", {
+	fetch (`http://localhost:8080/api/v1/Patient/${patientId}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type' : 'application/json'
@@ -119,7 +118,7 @@ function updatePatient(row) {
 		}
 		return response.json()
 	}).then (data => {
-		console.log('Patient updated succesfully ' + data)
+		console.log("Patient updated succesfully ", data)
 		$('#updatePatientModal').modal('hide');
 		//modify data
 		row.cells[1].innerText=patient.name;
@@ -134,7 +133,7 @@ function deletePatient(event) {
 	let row=event.target.parentNode.parentNode;
 	let patientId=row.cells[0].innerText;
 
-	fetch (`https://informatica.iesquevedo.es/marcas/patients/${patientId}?confirm=true`, {
+	fetch (`http://localhost:8080/api/v1/Patient/${patientId}?confirm=1`, {
 		method: 'DELETE',
 		headers: {
 			'Content-Type' : 'application/json'
