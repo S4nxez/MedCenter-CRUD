@@ -1,5 +1,6 @@
 package com.example.demo.medRecord;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +14,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "medicalRecord")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "medical_record")
 public class MedRecord {
     @Id
     @SequenceGenerator(
@@ -28,12 +30,14 @@ public class MedRecord {
     private Long id;
     private String description;
     private LocalDate date;
-    private int idDoctor;
+    private Long idPatient;
+    private Long idDoctor;
     private String medications;
 
-    public MedRecord(String description, LocalDate date, int idDoctor, String medications) {
+    public MedRecord(String description, LocalDate date, Long idPatient, Long idDoctor, String medications) {
         this.description = description;
         this.date = date;
+        this.idPatient = idPatient;
         this.idDoctor = idDoctor;
         this.medications = medications;
     }
@@ -44,6 +48,7 @@ public class MedRecord {
                 "id=" + id +
                 ", description='" + description + '\'' +
                 ", date=" + date +
+                ", idPatient=" + idPatient +
                 ", idDoctor=" + idDoctor +
                 ", medications='" + medications + '\'' +
                 '}';

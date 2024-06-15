@@ -10,14 +10,15 @@ import java.util.List;
 @Configuration
 public class MedRecordConfig {
     @Bean
-    CommandLineRunner commandLineRunner(
+    CommandLineRunner medCommandLineRunner(
             MedRecordRepository repository
     ){
         return args -> {
             MedRecord med1 = new MedRecord(
                     "Hepatitis",
                     LocalDate.now(),
-                    2,
+                    1L,
+                    2L,
                     "Hepsera"
             );
             repository.saveAll(List.of(med1));
