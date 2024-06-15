@@ -21,6 +21,7 @@ public class PatientController {
     public List<Patient> getPatients(){
         return patientServ.getPatients();
     }
+
     @PostMapping
     public Patient registerNewPatient(@RequestBody Patient patient){
         return patientServ.addNewPatient(patient);
@@ -28,7 +29,7 @@ public class PatientController {
 
     @DeleteMapping(path = "{patientId}")
     public ResponseEntity<Patient> deletePatient(@PathVariable("patientId") Long patientId,
-                              @RequestParam("confirm") boolean confirm){
+                                                 @RequestParam("confirm") boolean confirm){
         if (confirm) {
             try {
                 Patient deletedPatient = patientServ.deletePatient(patientId);

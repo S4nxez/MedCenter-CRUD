@@ -34,9 +34,6 @@ public class PatientService {
 
     @Transactional
     public Patient deletePatient(Long patientId) {
-        if (!patientRepository.existsById(patientId)) {
-            throw new IllegalStateException("Patient with id " + patientId + " does not exist");
-        }
         Patient ret = patientRepository.findById(patientId).orElseThrow(() ->
                 new IllegalStateException("Patient with id " + patientId + " does not exist")
         );
@@ -46,12 +43,13 @@ public class PatientService {
 
     @Transactional
     public Patient updatePatient(Long id, String name, String phone) {
-        Patient patient = patientRepository.findById(id).orElseThrow(()-> new IllegalStateException("Patient with ID "+id+" does not exists"));
+        Patient patient = patientRepository.findById(id).orElseThrow(()->
+                new IllegalStateException("Patient with ID "+id+" does not exists"));
         if(name!=null && !name.isEmpty() && !Objects.equals(patient.getName(), name)) patient.setName(name);
         if(phone!=null && !phone.isEmpty() && !Objects.equals(patient.getPhone(),phone)){
             Optional<Patient> patientOptional = patientRepository.findPatientById(id);
             if(patientOptional.isPresent())
-                throw new IllegalStateException("Email taken");
+                throw new IllegalStateException("Id taken");
             patient.setId(id);
         }
         return patient;

@@ -3,7 +3,7 @@ function getInfo(event){
 	let patientId=row.cells[0].innerText;
 	let patientName=row.cells[1].innerText;
 
-	fetch (`https://informatica.iesquevedo.es/marcas/patients/${patientId}/medRecords`)
+	fetch (`http://localhost:8080/api/v1/MedRecord/${patientId}`)
 	.then (response => {
 		if (!response.ok)
 			throw new Error ('Network response is not ok')
@@ -91,7 +91,7 @@ function updateMedRecord(row) {
 	let idDoctor	= document.getElementById("updateMedRecordDoctor").value;
 	let selectedMed	= getSelectMeds("updateMedRecordMeds");
 	let formattedDate=parsedDate.toISOString().split('T')[0];
-	console.log(patientId);
+
 	let medRecord = {
 		id: medRecordId,
 		description: diagnosis,
@@ -100,7 +100,8 @@ function updateMedRecord(row) {
 		idDoctor: Number(idDoctor),
 		medications: selectedMed
 	}
-	fetch ("https://informatica.iesquevedo.es/marcas/patients/medRecords", {
+
+	fetch (`http://localhost:8080/api/v1/MedRecord/${medRecordId}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type' : 'application/json'
@@ -113,7 +114,7 @@ function updateMedRecord(row) {
 		}
 		return response.json()
 	}).then (data => {
-		//console.log(medRecord) // test
+		console.log(medRecord)
 		console.log('MedRecord updated succesfully ' + data)
 		$('#updateMedRecordModal').modal('hide');
 		//modify data
@@ -128,7 +129,7 @@ function updateMedRecord(row) {
 }
 
 function deleteMedRecord(medRecord, row) {
-	fetch (`https://informatica.iesquevedo.es/marcas/patients/medRecords/${medRecord.id}`, {
+	fetch (`http://localhost:8080/api/v1/MedRecord/${medRecord.id}`, {
 		method: 'DELETE',
 		headers: {
 			'Content-Type' : 'application/json'
@@ -166,16 +167,18 @@ function addMedRecord() {
 	let formattedDate=parsedDate.toISOString().split('T')[0]; //convert to java date
 	let idDoctor= document.getElementById("addMedRecordDoctor").value;
 	let selectedMed = getSelectMeds("addMedRecordMeds");
+	let patientId	= document.getElementById("medRecordTable").getAttribute("patientIdV");
 
 	let medRecord = {
 		id: 0,
 		description: diagnosis,
 		date: formattedDate,
+		idPatient: patientId,
 		idDoctor: Number(idDoctor),
 		medications: selectedMed
 	};
 
-	fetch ("https://informatica.iesquevedo.es/marcas/patients/medRecords", {
+	fetch ("http://localhost:8080/api/v1/MedRecord", {
 		method: 'POST',
 		headers: {
 			'Content-Type' : 'application/json'
@@ -217,7 +220,7 @@ function fillDoctors(elementId) {
 		})
 	})
 	.catch (error => {
-		console.error('Error updating patient: ', error);
+		console.error('Error filling the doctors: ', error);
 	});
 }
 
@@ -242,13 +245,16 @@ function fillMedications(meds) {
 	comboM.appendChild(option);
 }
 
-function getSelectMeds(medsSelect) {
-	let medsList=document.getElementById(medsSelect);
-	let meds=[];
-	for(let i = 0; i < medsList.options.length; i++) {
-		let option=medsList.options[i];
-		if (option.selected)
+function getSelectMeds(medsSelect) { //I modified this method so that the selected meds is just a string joined by comas instead of an array of strings as it wasn´t a valid primitive type in java
+	let medsList = document.getElementById(medsSelect);
+	let meds = [];
+
+	for (let i = 0; i < medsList.options.length; i++) {
+		let option = medsList.options[i];
+		if (option.selected) {
 			meds.push(option.textContent);
+		}
 	}
-	return meds;
+
+	return meds.join(", ");
 }

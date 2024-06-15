@@ -10,7 +10,7 @@ import java.util.List;
 public class PatientConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(
+    CommandLineRunner patientCommandLineRunner(
             PatientRepository repository
     ){
         return ars ->{
