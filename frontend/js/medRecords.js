@@ -1,5 +1,5 @@
 function getInfo(event){
-	let row = event.target.parentNode.parentNode;
+	let row = event.target.parentNode;
 	let patientId=row.cells[0].innerText;
 	let patientName=row.cells[1].innerText;
 
@@ -20,7 +20,7 @@ function getInfo(event){
 		medRTable.innerHTML=`<thead><tr><th colspan=5>${patientName}'s MedRecords</th><td colspan=2>
 		<button id="medRecAddB" class = 'btn btn-info btn-sm ms-2'>Add medRecord</button></td></tr>`
 		//second row
-		medRTable.innerHTML +="<tr><th>ID</th><th>Diagnosis</th><th>Date</th><th>Doctor</th><th>Medications</th><th>Action</th><th>Action</th></tr></thead></tbody>"
+		medRTable.innerHTML +="<tr><th>ID</th><th>Diagnosis</th><th>Date</th><th>Doctor</th><th>Medications</th><th style='text-align: center;'><img src='images/icons8-eliminar-64.png' alt='delete' style='width: 30px; height: 30px;'></th><th style='text-align: center;'><img src='images/icons8-actualizar-60.png' alt='delete' style='width: 30px; height: 30px;'></th></tr></thead></tbody>"
 		let medRTableBody = medRTable.querySelector("tbody");
 		medRTable.setAttribute("patientIdV", patientId);
 		data.forEach(medRecord => {
@@ -41,7 +41,7 @@ function createMedRecordRow(medRecord) {
 	"<td>" + medRecord.date +"</td>" +
 	"<td>" + medRecord.idDoctor +"</td>" +
 	"<td>" + medRecord.medications +"</td>" +
-	"<td><button class='btn btn-danger btn-sm' >Delete</button></td>" +
+	"<td><button class='btn btn-danger btn-sm'>Delete</button></td>" +
 	"<td><button class='btn btn-primary btn-sm ms-2' >Update</button></td>";
 	let deleteButton = row.querySelector(".btn-danger");
 	deleteButton.addEventListener("click", function () { deleteMedRecord(medRecord, row) });

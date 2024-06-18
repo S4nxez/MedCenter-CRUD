@@ -24,11 +24,10 @@ function createPatientRow(patient) {
 	row.innerHTML =	"<td>" + patient.id +"</td>" +
 		"<td>" + patient.name +"</td>" +
 		"<td>" + patient.phone +"</td>" +
-		"<td><button class='btn btn-info btn-sm' >Get info</button></td>" +
 		"<td><button class='btn btn-danger btn-sm' >Delete</button></td>" +
 		"<td><button class='btn btn-primary btn-sm ms-2' >Update</button></td>";
 
-		row.querySelector(".btn-info").addEventListener("click", getInfo);
+		row.addEventListener("click", getInfo);
 		row.querySelector(".btn-primary").addEventListener("click", showUpdatePatientModal);
 		row.querySelector(".btn-danger").addEventListener("click", deletePatient);
 		return row;

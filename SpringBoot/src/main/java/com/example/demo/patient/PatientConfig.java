@@ -16,16 +16,31 @@ public class PatientConfig {
         return ars ->{
            Patient john = new Patient(
                     1L,
-                    "John Smith",
+                    "Eduardo García",
                     "666 23 23 12"
 
             );
             Patient dani = new Patient(
                     2L,
-                    "Dani Sánchez",
+                    "Juanjo Fernández",
                     "601 23 12 12"
             );
-            repository.saveAll(List.of(john, dani));
+            Patient maria = new Patient(
+                    3L,
+                    "Carlos Lopez",
+                    "644 55 55 55"
+            );
+            Patient carlos = new Patient(
+                    4L,
+                    "Pedro García",
+                    "633 44 44 44"
+            );
+            Patient laura = new Patient(
+                    5L,
+                    "Daniel Sánchez",
+                    "622 33 33 33"
+            );
+            repository.saveAll(List.of(john, dani, maria, carlos, laura));
         };
     }
 }
