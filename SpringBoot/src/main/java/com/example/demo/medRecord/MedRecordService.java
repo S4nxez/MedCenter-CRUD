@@ -50,4 +50,14 @@ public class MedRecordService {
     public MedRecord addMedRecord(MedRecord medRecord) {
         return repo.save(medRecord);
     }
+
+    public MedRecord updateMedRecord(Long medRecordId, MedRecord medRecord) {
+        return Optional.of(medRecord)
+                .map(given -> {
+                    given.setId(medRecordId);
+                    return given;
+                })
+                .map(repo::save)
+                .orElseThrow(() -> new RuntimeException("Error updating mad record"));
+    }
 }

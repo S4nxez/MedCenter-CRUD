@@ -2,17 +2,14 @@ package com.example.demo.medRecord;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
+@ToString
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "medical_record")
@@ -40,17 +37,5 @@ public class MedRecord {
         this.idPatient = idPatient;
         this.idDoctor = idDoctor;
         this.medications = medications;
-    }
-
-    @Override
-    public String toString() {
-        return "MedRecord{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", date=" + date +
-                ", idPatient=" + idPatient +
-                ", idDoctor=" + idDoctor +
-                ", medications='" + medications + '\'' +
-                '}';
     }
 }

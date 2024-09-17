@@ -1,16 +1,14 @@
 package com.example.demo.patient;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Data
+@ToString
 @Entity
-@Setter
+@Builder
 @Table(name = "patient")
 public class Patient {
     @Id
@@ -26,19 +24,4 @@ public class Patient {
     private Long id;
     private String name;
     private String phone;
-
-    public Patient(String name, String phone) {
-        this.name = name;
-        this.phone = phone;
-    }
-
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
-    }
-
 }

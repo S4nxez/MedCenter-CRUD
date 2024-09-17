@@ -29,12 +29,8 @@ public class MedRecordController {
     @PutMapping(path = "{medRecordId}")
     public MedRecord updateMedRecord(
             @PathVariable("medRecordId") Long medRecordId,
-            @RequestParam(required = false) String description,
-            @RequestParam(required = false)@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate date,
-            @RequestParam(required = false) Long idPatient,
-            @RequestParam(required = false) Long idDoctor,
-            @RequestParam(required = false) String medications){
-        return service.updateMedRecord(medRecordId,description,date,idPatient,idDoctor,medications);
+            @RequestBody MedRecord medRecord){
+        return service.updateMedRecord(medRecordId, medRecord);
     }
 
     @PostMapping
