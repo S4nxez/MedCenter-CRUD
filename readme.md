@@ -43,7 +43,7 @@ The application features a login screen for user authentication. Upon successful
 - **Add Patient**: Allows the addition of new patients.
 - **Modify Patient**: Enables editing of existing patient details.
 - **Delete Patient**: Permits the removal of patients from the table.
-- **View Medical Records**: Clicking each patient displays a detailed table of medical records for each one, with options to add, modify, and delete records.
+- **View Medical Records**: Displays a detailed table of medical records for each patient, with options to add, modify, and delete records.
 
 ## Screenshots
 
@@ -53,8 +53,7 @@ Here you can find some screenshots of the application:
    ![Login Screen](https://github.com/S4nxez/MedCenter-CRUD/assets/119665698/a1348023-e9d8-4226-a92a-f13e7ea1d66f)
 
 2. **Patient Table**
-   ![Patient Table](https://github.com/S4nxez/MedCenter-CRUD/assets/119665698/b781b2ac-ec4a-461b-8a45-dff86a37faa1)
-
+   ![Patient Table](https://github.com/S4nxez/MedCenter-CRUD/assets/119665698/f67d7a00-3336-49b3-8f09-c8e0e9f56bda)
 
 ## Conclusion
 

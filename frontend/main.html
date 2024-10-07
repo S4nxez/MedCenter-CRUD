@@ -16,18 +16,24 @@
 </head>
 <body>
 	<div class="container mt-3">
-		<h2>CRUD Patients</h2>
-		<button id="add1" class="btn btn-success">Add</button>
-
+		<div class="row">
+			<p class="col-md-3"></p>
+			<h1 class="col-md-6 ">Patient Appointments Manager</h1>
+			<hr>
+		</div>
+		<br><br>
+		<button id="add1" class="btn btn-success">Add new patient</button>
+		<br><br>
 		<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
 			<th>ID</th>
 			<th>Name</th>
+			<th>BirthDate</th>
 			<th>Phone</th>
-			<th>Action</th>
-			<th>Action</th>
-			<th>Action</th>
+			<th>Paid</th>
+			<th style="text-align: center;"><img src="images/icons8-eliminar-64.png" alt="delete" style="width: 30px; height: 30px;"></th>
+			<th style="text-align: center;"><img src="images/icons8-actualizar-60.png" alt="update" style="width: 30px; height: 30px;"></th>
 			</tr>
 		</thead>
 		<tbody id="patientTableBody">
