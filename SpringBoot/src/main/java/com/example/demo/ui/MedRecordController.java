@@ -28,14 +28,8 @@ public class MedRecordController {
     public List<MedRecordUI> getMedRecords(@PathVariable("patientId") Long patientId){ return service.getMedRecords(patientId);}
 
     @PutMapping(path = "{medRecordId}")
-    public MedRecordUI updateMedRecord(
-            @PathVariable("medRecordId") Long medRecordId,
-            @RequestParam(required = false) String description,
-            @RequestParam(required = false)@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate date,
-            @RequestParam(required = false) Long idPatient,
-            @RequestParam(required = false) Long idDoctor,
-            @RequestParam(required = false) String medications){
-        return service.updateMedRecord(medRecordId,description,date,idPatient,idDoctor,medications);
+    public MedRecordUI updateMedRecord(@RequestBody MedRecordUI medRecordUI){
+        return service.updateMedRecord(medRecordUI);
     }
 
     @PostMapping

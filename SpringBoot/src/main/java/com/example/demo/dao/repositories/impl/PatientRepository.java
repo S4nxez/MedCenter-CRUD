@@ -17,7 +17,7 @@ public class PatientRepository {
             PatientRepositoryInt repository
     ){
         return ars ->{
-           PatientUI john = new PatientUI(
+           PatientUI eduardo = new PatientUI(
                     1L,
                     "Eduardo García",
                     LocalDate.of(2000,12,3),
@@ -53,7 +53,7 @@ public class PatientRepository {
                     "622 33 33 33",
                     0
             );
-            repository.saveAll(List.of(john, juanjo, carlos, pedro, daniel));
+            repository.saveAll(List.of(eduardo, juanjo, carlos, pedro, daniel));
         };
     }
 }

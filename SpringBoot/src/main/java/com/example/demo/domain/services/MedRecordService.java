@@ -26,15 +26,15 @@ public class MedRecordService {
     }
 
     @Transactional
-    public MedRecordUI updateMedRecord(Long medRecordId, String description, LocalDate date, Long patientId, Long idDoctor, String medications) {
-        Optional<MedRecordUI> optionalMedRecord = repo.findById(medRecordId);
+    public MedRecordUI updateMedRecord(MedRecordUI updatedMedRecordUI) {
+        Optional<MedRecordUI> optionalMedRecord = repo.findById(updatedMedRecordUI.getId());
         if (optionalMedRecord.isPresent()) {
             MedRecordUI existingMedRecordUI = optionalMedRecord.get();
-            existingMedRecordUI.setDescription(description);
-            existingMedRecordUI.setDate(date);
-            existingMedRecordUI.setIdPatient(patientId);
-            existingMedRecordUI.setIdDoctor(idDoctor);
-            existingMedRecordUI.setMedications(medications);
+            existingMedRecordUI.setDescription(updatedMedRecordUI.getDescription());
+            existingMedRecordUI.setDate(updatedMedRecordUI.getDate());
+            existingMedRecordUI.setIdPatient(updatedMedRecordUI.getIdPatient());
+            existingMedRecordUI.setIdDoctor(updatedMedRecordUI.getIdDoctor());
+            existingMedRecordUI.setMedications(updatedMedRecordUI.getMedications());
 
             return existingMedRecordUI;
         } else {
