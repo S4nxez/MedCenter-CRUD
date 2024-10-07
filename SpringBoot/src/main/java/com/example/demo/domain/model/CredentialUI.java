@@ -8,5 +8,4 @@ import lombok.Data;
 public class CredentialUI {
     private String username;
     private String password;
-    private int patientId;
 }

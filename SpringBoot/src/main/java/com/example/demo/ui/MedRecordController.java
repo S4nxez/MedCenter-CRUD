@@ -3,14 +3,13 @@ package com.example.demo.ui;
 import com.example.demo.domain.model.MedRecordUI;
 import com.example.demo.domain.services.MedRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="api/v1/MedRecord")
+@RequestMapping(path="patients/")
 public class MedRecordController {
     private final MedRecordService service;
 
@@ -19,13 +18,13 @@ public class MedRecordController {
         this.service = serv;
     }
 
-    @DeleteMapping(path = "{medRecordId}")
-    public MedRecordUI deleteMedRecord(@PathVariable("medRecordId")Long medRecordId){
-        return service.deleteMedRecord(medRecordId);
+    @DeleteMapping("medRecords/{id}")
+    public MedRecordUI deleteMedRecord(@PathVariable int id){
+        return service.deleteMedRecord(id);
     }
 
-    @GetMapping(path = "{patientId}")
-    public List<MedRecordUI> getMedRecords(@PathVariable("patientId") Long patientId){ return service.getMedRecords(patientId);}
+    @GetMapping(path = "{idPatient}/medRecords")
+    public List<MedRecordUI> getMedRecords(@PathVariable Long idPatient){ return service.getMedRecords(idPatient);}
 
     @PutMapping(path = "{medRecordId}")
     public MedRecordUI updateMedRecord(@RequestBody MedRecordUI medRecordUI){

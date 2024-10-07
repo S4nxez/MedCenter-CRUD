@@ -1,5 +1,7 @@
 package com.example.demo.domain.services;
 
+import com.example.demo.dao.model.Credential;
+import com.example.demo.dao.model.Patient;
 import com.example.demo.dao.repositories.PatientRepositoryInt;
 import com.example.demo.domain.model.PatientUI;
 import jakarta.transaction.Transactional;
@@ -44,16 +46,9 @@ public class PatientService {
     }
 
     @Transactional
-    public PatientUI updatePatient(Long id, String name, String phone) {
-        PatientUI patientUI = patientRepositoryInt.findById(id).orElseThrow(()->
-                new IllegalStateException("Patient with ID "+id+" does not exists"));
-        if(name!=null && !name.isEmpty() && !Objects.equals(patientUI.getName(), name)) patientUI.setName(name);
-        if(phone!=null && !phone.isEmpty() && !Objects.equals(patientUI.getPhone(),phone)){
-            Optional<PatientUI> patientOptional = patientRepositoryInt.findPatientById(id);
-            if(patientOptional.isPresent())
-                throw new IllegalStateException("Id taken");
-            patientUI.setId(id);
-        }
+    public PatientUI updatePatient(PatientUI patientUI) {
+        patientRepositoryInt.deleteById(patientUI.getId());
+        addNewPatient(patientUI);
         return patientUI;
     }
 }

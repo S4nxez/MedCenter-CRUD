@@ -43,9 +43,9 @@ public class MedRecordService {
     }
 
     @Transactional
-    public MedRecordUI deleteMedRecord(Long medRecordId) {
-        MedRecordUI ret = repo.getById(medRecordId);
-        repo.deleteById(medRecordId);
+    public MedRecordUI deleteMedRecord(int medRecordId) {
+        MedRecordUI ret = repo.getById((long)medRecordId);
+        repo.deleteById((long)medRecordId);
         return ret;
     }
 

@@ -26,8 +26,8 @@ public class PatientUI {
     private LocalDate   dob;
     private String      phone;
     private int         paid;
-
-
+    private String      password;
+    private String      userName;
 
     @Override
     public String toString() {
@@ -36,7 +36,9 @@ public class PatientUI {
                 ", name='" + name + '\'' +
                 ", dob=" + dob +
                 ", phone='" + phone + '\'' +
-                ", paid=" + paid +
+                ", paid=" + paid + '\'' +
+                ", password='" + password + '\'' +
+                ", userName='" + userName + '\'' +
                 '}';
     }
 }
