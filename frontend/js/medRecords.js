@@ -1,5 +1,6 @@
 function getInfo(event){
-	let row = event.target.parentNode;
+	let row = event.target.closest('tr');
+	if (row) {
 	let patientId=row.cells[0].innerText;
 	let patientName=row.cells[1].innerText;
 
@@ -33,6 +34,7 @@ function getInfo(event){
 	})
 	.catch(error => console.error("Error in the fetch: ", error))
 }
+}
 
 function createMedRecordRow(medRecord) {
 	let row = document.createElement("tr");
@@ -64,7 +66,6 @@ function showUpdateMedModal(event) {
 	fillDoctors("updateMedRecordDoctor");
 	//Fill list with medications
 	fillMedications("updateMedRecordMeds");
-
 
 	document.getElementById("updateMedRecordPatientId").value=patientId;
 	document.getElementById("updateMedRecordId").value=id;
