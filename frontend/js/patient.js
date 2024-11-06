@@ -2,16 +2,15 @@ document.getElementById("add1").addEventListener("click", showAddPatientModal);
 getAllPatients()
 
 function getAllPatients() {
-	fetch ("http://localhost:8080/api/v1/Patient")
+	fetch ("http://localhost:8080/patients")
 		.then (response => {
 			if (!response.ok)
 				throw new Error ('Network response is not ok')
 			return response.json()
 		})
 		.then (data => {
-			var tableBody = document.getElementById("patientTableBody");
-
-			console.log(data);
+			var tableBody = document.querySelector("#patientTable tbody");
+			tableBody.innerHTML = "";
 			data.forEach(patient => {
 				let row = createPatientRow(patient);
 				tableBody.appendChild(row);
