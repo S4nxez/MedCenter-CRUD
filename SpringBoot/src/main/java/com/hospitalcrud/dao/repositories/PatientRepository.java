@@ -1,7 +1,6 @@
 package com.hospitalcrud.dao.repositories;
 
 import com.hospitalcrud.dao.model.Patient;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

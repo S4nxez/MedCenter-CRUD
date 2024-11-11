@@ -9,6 +9,7 @@ import java.util.Properties;
 
 @Log4j2
 @Getter
+@org.springframework.context.annotation.Configuration
 public class Configuration {
     private static Configuration instance=null;
     private Properties p;
