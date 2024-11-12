@@ -1,7 +1,6 @@
 package com.hospitalcrud.dao.mappers;
 
 import com.hospitalcrud.dao.model.MedRecord;
-import com.hospitalcrud.dao.model.Medication;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
@@ -13,7 +12,6 @@ import java.util.List;
 @Component
 public class MedRecordRowMapper {
     public List<MedRecord> mapRow(ResultSet rs) {
-
         List<MedRecord> lista = new ArrayList<>();
 
         try {
@@ -24,8 +22,7 @@ public class MedRecordRowMapper {
                 int doctorId = rs.getInt("doctor_id");
                 String diagnosis = rs.getString("diagnosis");
                 LocalDate admission_date = rs.getDate("admission_date").toLocalDate();
-                List<Medication> medications = getMedicationsForRecord(id); //TODO
-                lista.add(new MedRecord(id, patientId, doctorId, diagnosis, admission_date, medications));
+                lista.add(new MedRecord(id, patientId, doctorId, diagnosis, admission_date, null));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -10,17 +10,16 @@ import java.util.List;
 
 
 @Component
-public class DoctorRowMapperJDBC {
+public class DoctorRowMapper {
     public List<Doctor> mapRow(ResultSet rs) {
-
         List<Doctor> lista = new ArrayList<>();
-
         try {
             while (rs.next()) {
 
                 int id = rs.getInt("doctor_id");
                 String name = rs.getString("name");
-                lista.add(new Doctor(id, name));
+                String specialization = rs.getString("specialization");
+                lista.add(new Doctor(id, name, specialization));
             }
         } catch (SQLException e) {
             e.printStackTrace();

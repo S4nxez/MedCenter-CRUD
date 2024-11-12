@@ -13,6 +13,4 @@ public interface MedRecordRepository {
     void delete(int id);
 
     void update(MedRecord medRecord);
-
-
 }

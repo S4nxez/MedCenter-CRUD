@@ -1,4 +1,4 @@
-package com.hospitalcrud.dao.repositories.JDBC;
+package com.hospitalcrud.dao.repositories.JDBC.common;
 
 import com.hospitalcrud.config.Configuration;
 import org.springframework.stereotype.Component;
@@ -12,12 +12,12 @@ import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
 
 @Component
-public class DBConnection {
+public class PoolDBConnection {
 
     private final Configuration config;
     private final DataSource hikariDataSource;
 
-    public DBConnection(Configuration config) {
+    public PoolDBConnection(Configuration config) {
         this.config = config;
         this.hikariDataSource = getHikariPool();
     }

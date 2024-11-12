@@ -1,4 +1,4 @@
-package com.hospitalcrud.dao.repositories.text.files;
+package com.hospitalcrud.dao.repositories.csv;
 
 import com.hospitalcrud.config.Configuration;
 import com.hospitalcrud.dao.model.Doctor;
@@ -10,21 +10,15 @@ import org.springframework.stereotype.Repository;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 @Repository
 @Log4j2
 @Profile("txtFiles")
 public class TxtDoctorRepository implements com.hospitalcrud.dao.repositories.DoctorRepository {
 
-
-    public TxtDoctorRepository() {
-    }
-
     @Override
-    public List<Doctor> getAll() { //PONER EL READALL LINES COMO EN EL PATIENT QUE ESTE ES MAS CORTO
+    public List<Doctor> getAll() {
         List<Doctor> doctors = new ArrayList<>();
-
         try {
             List<String> lines = java.nio.file.Files.readAllLines(java.nio.file.Paths
                     .get(Configuration.getInstance().getProperty(Constantes.DOCTOR_PATH)));
@@ -32,7 +26,8 @@ public class TxtDoctorRepository implements com.hospitalcrud.dao.repositories.Do
                 String[] values = line.split(";");
                 Doctor doctor = new Doctor(
                         Integer.parseInt(values[0].trim()),
-                        values[1].trim()
+                        values[1].trim(),
+                        values[2].trim()
                 );
 
                 doctors.add(doctor);

@@ -1,11 +1,13 @@
 package com.hospitalcrud.dao.mappers;
 
 import com.hospitalcrud.dao.model.Patient;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+@Profile("txtFiles")
 @Component
 public class PatientRowMapper {
 

@@ -1,8 +1,10 @@
 package com.hospitalcrud.dao.repositories.JDBC;
 
-import com.hospitalcrud.dao.mappers.DoctorRowMapperJDBC;
+import com.hospitalcrud.dao.mappers.DoctorRowMapper;
 import com.hospitalcrud.dao.model.Doctor;
 import com.hospitalcrud.dao.repositories.DoctorRepository;
+import com.hospitalcrud.dao.repositories.JDBC.common.PoolDBConnection;
+import com.hospitalcrud.dao.repositories.JDBC.common.QuerysSQL;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -16,10 +18,10 @@ import java.util.List;
 @Profile("jdbc")
 public class DoctorRepositoryImpl implements DoctorRepository {
 
-    private DBConnection pool;
-    private DoctorRowMapperJDBC doctorRowMapper;
+    private PoolDBConnection pool;
+    private DoctorRowMapper doctorRowMapper;
 
-    public DoctorRepositoryImpl(DBConnection pool, DoctorRowMapperJDBC doctorRowMapper) {
+    public DoctorRepositoryImpl(PoolDBConnection pool, DoctorRowMapper doctorRowMapper) {
         this.pool = pool;
         this.doctorRowMapper = doctorRowMapper;
     }
@@ -28,7 +30,7 @@ public class DoctorRepositoryImpl implements DoctorRepository {
     public List<Doctor> getAll() {
         try (Connection connection = pool.getConnection();
              Statement statement = connection.createStatement()){
-            ResultSet rs = statement.executeQuery("SELECT * FROM doctors");
+            ResultSet rs = statement.executeQuery(QuerysSQL.GET_ALL_DOCTORS);
 
             return doctorRowMapper.mapRow(rs);
         }catch (SQLException e){

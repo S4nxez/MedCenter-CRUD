@@ -10,12 +10,12 @@ import java.util.List;
 @Repository
 @Profile("static")
 public class StaticDoctorRepository implements com.hospitalcrud.dao.repositories.DoctorRepository {
-    private List<Doctor> doctorList=new ArrayList<>();
+    private List<Doctor> doctorList = new ArrayList<>();
 
-    public List<Doctor> getAll(){
-        doctorList.add(new Doctor(1,"Diego"));
-        doctorList.add(new Doctor(1,"Pepa"));
-        doctorList.add(new Doctor(1,"Susan"));
+    public List<Doctor> getAll() {
+        doctorList.add(new Doctor(1, "Diego", "Cardiology"));
+        doctorList.add(new Doctor(2, "Pepa", "Neurology"));
+        doctorList.add(new Doctor(3, "Susan", "Pediatrics"));
 
         return doctorList;
     }

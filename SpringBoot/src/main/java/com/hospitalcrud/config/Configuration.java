@@ -3,13 +3,14 @@ package com.hospitalcrud.config;
 import com.hospitalcrud.utils.Constantes;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Properties;
 
 @Log4j2
 @Getter
-@org.springframework.context.annotation.Configuration
+@Component
 public class Configuration {
     private static Configuration instance=null;
     private Properties p;

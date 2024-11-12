@@ -28,7 +28,8 @@ public class MedRecordService {
 
         medRecordRepository.getAll(idPatient).forEach(medRecord -> {
             List<String> listMedications=new ArrayList<>();
-            medRecord.getMedications().forEach(medication -> listMedications.add(medication.getMedicationName()));
+            if (medRecord.getMedications() != null)
+                medRecord.getMedications().forEach(medication -> listMedications.add(medication.getMedicationName()));
             medRecordUIList.add(new MedRecordUI(medRecord.getId(), medRecord.getDiagnosis(), medRecord.getDate().toString(), medRecord.getIdPatient()
             , medRecord.getIdDoctor(),listMedications));
 

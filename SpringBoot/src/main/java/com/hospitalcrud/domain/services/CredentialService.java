@@ -10,21 +10,17 @@ import java.util.Objects;
 @Service
 public class CredentialService {
 
-    private CredentialRepository credentialRepository;
+    private final CredentialRepository credentialRepository;
 
     public CredentialService(CredentialRepository credentialRepository) {
         this.credentialRepository = credentialRepository;
     }
 
     public boolean get(CredentialUI credentialui) {
-
-        Credential credentialRepository = this.credentialRepository.get(credentialui.getUsername());
-
-        boolean aux;
-        if (Objects.equals(credentialRepository.getPassword(), credentialui.getPassword())) {
-            aux = true;
-        } else aux = false;
-
-        return aux;
+        return credentialRepository.getAll().stream()
+                .anyMatch(credential ->
+                        credential.getPassword().equals(credentialui.getPassword()) &&
+                                credential.getUsername().equals(credentialui.getUsername())
+                );
     }
 }

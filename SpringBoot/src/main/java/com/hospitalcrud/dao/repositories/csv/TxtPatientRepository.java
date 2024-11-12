@@ -1,4 +1,4 @@
-package com.hospitalcrud.dao.repositories.text.files;
+package com.hospitalcrud.dao.repositories.csv;
 
 import com.hospitalcrud.config.Configuration;
 import com.hospitalcrud.dao.mappers.PatientRowMapper;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Repository
 @Log4j2
-@Profile("txtFiless")
+@Profile("txtFiles")
 public class TxtPatientRepository implements PatientRepository {
     private final PatientRowMapper patientRowMapper;
 
@@ -41,7 +41,6 @@ public class TxtPatientRepository implements PatientRepository {
 
         return patients;
     }
-    // HACER ESTE METODO EN 2 PRIVADOS
 
     @Override
     public int add(Patient patient) {

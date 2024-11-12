@@ -4,7 +4,9 @@ import com.hospitalcrud.dao.model.Credential;
 import com.hospitalcrud.dao.model.Patient;
 
 
+import com.hospitalcrud.dao.model.Payment;
 import com.hospitalcrud.dao.repositories.PatientRepository;
+import com.hospitalcrud.dao.repositories.PaymentRepository;
 import com.hospitalcrud.domain.model.PatientUI;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +16,25 @@ import java.util.List;
 @Service
 public class PatientService {
     private final PatientRepository patientRepository;
+    private final PaymentRepository paymentRepository;
 
-    public PatientService(PatientRepository patientRepository) {
+    public PatientService(PatientRepository patientRepository, PaymentRepository paymentRepository) {
         this.patientRepository = patientRepository;
+        this.paymentRepository = paymentRepository;
     }
 
     public List<PatientUI> get(){
         List<Patient> patient = patientRepository.getAll();
         List<PatientUI> patientsUI = new ArrayList<>();
+        List<Payment> payments = paymentRepository.getAll();
 
-        patient.forEach(patient1 -> patientsUI.add(new PatientUI(patient1.getId(),patient1.getName(),
-                patient1.getBirthDate(),patient1.getPhone(),0,null,null)));
+        patient.forEach(patient1 ->
+                patientsUI.add(new PatientUI(patient1.getId(),patient1.getName(), patient1.getBirthDate(),patient1.getPhone(),payments.stream()
+                        .filter(payment -> payment.getPatient_id() == patient1.getId())
+                        .map(Payment::getAmount)
+                        .reduce(0f, Float::sum)
+                        .intValue(),null,null)
+                ));
         return patientsUI;
     }
 

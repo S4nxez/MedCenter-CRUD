@@ -11,20 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-//TODO@Profile("jdbc")
 public class PatientRowMapperJDBC {
     public List<Patient> mapRow(ResultSet rs) {
-
         List<Patient> listaPatients = new ArrayList<>();
 
         try {
             while (rs.next()) {
-
                 int id = rs.getInt("patient_id");
                 String name = rs.getString("name");
                 LocalDate birthDate = rs.getDate("date_of_birth").toLocalDate();
                 String phone = rs.getString("phone");
-                Patient patient = new Patient(birthDate, new Credential(0, "", "", id, 0), id, name, phone);
+                Patient patient = new Patient(birthDate, new Credential( null, null, id), id, name, phone);
                 listaPatients.add(patient);
             }
         } catch (SQLException e) {
