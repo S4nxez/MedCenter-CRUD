@@ -21,6 +21,8 @@ public class QuerysSQL {
     public static final String DELETE_APPOINTMENT = "DELETE FROM appointments where patient_id = ?";
     public static final String SELECT_ALL_MEDRECORDS_BY_PATIENT = "SELECT * FROM medical_records WHERE patient_id = ?";
     public static final String UPDATE_MEDRECORD = "UPDATE medical_records SET patient_id = ?, doctor_id = ?, diagnosis = ?, admission_date = ? WHERE record_id = ?";
+    public static final String INSERT_INTO_MEDICATIONS = "INSERT INTO prescribed_medications (record_id, medication_name) VALUES (?,?)" ;
+    public static final String DELETE_MEDICATIONS = "DELETE pm from prescribed_medications pm join medical_records md on pm.record_id = md.record_id where patient_id = ?";
 
     public QuerysSQL(){
     }

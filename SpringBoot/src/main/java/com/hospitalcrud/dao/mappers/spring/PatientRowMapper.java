@@ -15,7 +15,7 @@ public class PatientRowMapper implements RowMapper<Patient> {
 
         patient.setId(rs.getInt("patient_id"));
         patient.setName(rs.getString("name"));
-        patient.setBirthDate(rs.getDate("date_of_bith").toLocalDate());
+        patient.setBirthDate(rs.getDate("date_of_birth").toLocalDate());
         patient.setPhone(rs.getString("phone"));
 
         return patient;

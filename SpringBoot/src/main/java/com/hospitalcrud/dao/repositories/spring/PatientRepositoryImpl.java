@@ -80,7 +80,7 @@ public class PatientRepositoryImpl implements PatientRepository {
         if (confirm) {
             MedRecord medRecord=new MedRecord();
             medRecord.setIdPatient(idDelete);
-            medRecordRepository.delete(medRecord);
+            medRecordRepository.delete(medRecord.getId());
             paymentRepository.delete(medRecord.getIdPatient());
             credentialRepository.delete(medRecord.getIdPatient());
         }
@@ -92,5 +92,4 @@ public class PatientRepositoryImpl implements PatientRepository {
             throw new ForeignKeyConstraintError("¿Desea eliminar los MedRecord, Payments y Credentials del Usuario?");
         }
     }
-}
 }

@@ -28,4 +28,18 @@ public class CredentialRepositoryImpl implements CredentialRepository {
                 .query(credentialRowMapperSpring)
                 .list();
     }
+
+    public void add(Credential credential) {
+        jdbcClient.sql(QuerysSQL.INSERT_INTO_CREDENTIALS_USERNAME_PASSWORD_VALUES)
+                .param(1, credential.getUsername())
+                .param(2, credential.getPassword())
+                .param(3, credential.getPatientId())
+                .update();
+    }
+
+    public void delete(int id) {
+        jdbcClient.sql(QuerysSQL.DELETE_USER_LOGIN)
+                .param(1,id)
+                .update();
+    }
 }

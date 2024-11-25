@@ -27,7 +27,6 @@ public class PaymentRepositoryImpl implements PaymentRepository {
                 .list();
     }
 
-    @Override
     public void delete(int id) {
         jdbcClient.sql(QuerysSQL.DELETE_PAYMENT)
                 .param(1,id)

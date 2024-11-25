@@ -22,7 +22,14 @@ public class MedRecordRepositoryImpl implements MedRecordRepository {
     JdbcClient jdbcClient;
 
     @Autowired
-    private MedRecordRowMapper medRecordRowMapperSpring;
+    private final MedRecordRowMapper medRecordRowMapperSpring;
+    private final MedicationRepositoryImpl medicationRepository;
+
+    public MedRecordRepositoryImpl(MedicationRepositoryImpl medicationRepository,
+                                   MedRecordRowMapper medRecordRowMapperSpring) {
+        this.medicationRepository = medicationRepository;
+        this.medRecordRowMapperSpring = medRecordRowMapperSpring;
+    }
 
     @Override
     public List<MedRecord> getAll(int idPatient) {
@@ -61,15 +68,15 @@ public class MedRecordRepositoryImpl implements MedRecordRepository {
     @Override
     @Transactional
     public void delete(int medRecord_id) {
-        if (medRecord_id.getId() != 0){
+        if (medRecord_id != 0){
             medicationRepository.delete(medRecord_id);
-            jdbcClient.sql(QuerysSQL.DELETE_MEDRECORD)
-                    .param(1,medRecord_id.getId())
+            jdbcClient.sql(QuerysSQL.DELETE_FROM_MED_RECORD)
+                    .param(1,medRecord_id)
                     .update();
         }else{
             medicationRepository.delete(medRecord_id);
-            jdbcClient.sql(SQLQueries.DELETE_MED_RECORDS_BY_PATIENT)
-                    .param(1,medRecord_id.getIdPatient())
+            jdbcClient.sql(QuerysSQL.DELETE_MED_RECORDS_BY_PATIENT)
+                    .param(1,medRecord_id)
                     .update();
         }
     }
