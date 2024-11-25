@@ -1,6 +1,6 @@
 package com.hospitalcrud.dao.repositories.JDBC;
 
-import com.hospitalcrud.dao.mappers.MedicationRowMapper;
+import com.hospitalcrud.dao.mappers.JDBC.MedicationRowMapperJDBC;
 import com.hospitalcrud.dao.model.Medication;
 import com.hospitalcrud.dao.repositories.JDBC.common.PoolDBConnection;
 import com.hospitalcrud.dao.repositories.JDBC.common.QuerysSQL;
@@ -18,9 +18,9 @@ import java.util.List;
 @Profile("jdbc")
 public class MedicationRepositoryImpl implements MedicationRepository {
     private final PoolDBConnection pool;
-    private final MedicationRowMapper rowMapper;
+    private final MedicationRowMapperJDBC rowMapper;
 
-    public MedicationRepositoryImpl(PoolDBConnection pool, MedicationRowMapper rowMapper) {
+    public MedicationRepositoryImpl(PoolDBConnection pool, MedicationRowMapperJDBC rowMapper) {
         this.pool = pool;
         this.rowMapper = rowMapper;
     }

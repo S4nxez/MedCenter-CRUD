@@ -1,6 +1,6 @@
 package com.hospitalcrud.dao.repositories.JDBC;
 
-import com.hospitalcrud.dao.mappers.PaymentRowMapper;
+import com.hospitalcrud.dao.mappers.JDBC.PaymentRowMapperJDBC;
 import com.hospitalcrud.dao.model.Payment;
 import com.hospitalcrud.dao.repositories.JDBC.common.PoolDBConnection;
 import com.hospitalcrud.dao.repositories.JDBC.common.QuerysSQL;
@@ -19,9 +19,9 @@ import java.util.List;
 public class PaymentRepositoryImpl implements PaymentRepository {
 
     private final PoolDBConnection pool;
-    private final PaymentRowMapper rowMapper;
+    private final PaymentRowMapperJDBC rowMapper;
 
-    public PaymentRepositoryImpl(PoolDBConnection pool, PaymentRowMapper rowMapper) {
+    public PaymentRepositoryImpl(PoolDBConnection pool, PaymentRowMapperJDBC rowMapper) {
         this.pool = pool;
         this.rowMapper = rowMapper;
     }

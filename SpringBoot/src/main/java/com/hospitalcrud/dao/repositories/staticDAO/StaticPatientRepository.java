@@ -19,27 +19,33 @@ public class StaticPatientRepository implements PatientRepository {
     public StaticPatientRepository() {
         patients.add(new Patient(
                 LocalDate.of(2003, 5, 23),
-                new Credential("john_smith", "password123", 1),
+                new Credential(1, "john_smith", "password123", 1, 1),
                 1,
                 "John Smith",
                 "333-222-111"
         ));
-
         patients.add(new Patient(
-                LocalDate.of(2003, 5, 23),
-                new Credential("diego_smith", "password456", 2),
+                LocalDate.of(1990, 8, 15),
+                null,
                 2,
-                "Diego Smith",
-                "333-222-111"
+                "Jane Doe",
+                "444-555-666"
+        ));
+        patients.add(new Patient(
+                LocalDate.of(1985, 12, 5),
+                null,
+                3,
+                "Mike Jones",
+                "777-888-999"
+        ));
+        patients.add(new Patient(
+                LocalDate.of(1978, 3, 30),
+                new Credential(4, "susan_lee", "password321", 4, 4),
+                4,
+                "Susan Lee",
+                "111-222-333"
         ));
 
-        patients.add(new Patient(
-                LocalDate.of(2003, 5, 23),
-                new Credential("maksim_smith", "password789", 3),
-                3,
-                "Maksim Smith",
-                "333-222-111"
-        ));
     }
 
     @Override

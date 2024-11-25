@@ -1,6 +1,5 @@
-package com.hospitalcrud.dao.mappers;
+package com.hospitalcrud.dao.mappers.JDBC;
 
-import com.hospitalcrud.dao.model.Credential;
 import com.hospitalcrud.dao.model.Patient;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +20,7 @@ public class PatientRowMapperJDBC {
                 String name = rs.getString("name");
                 LocalDate birthDate = rs.getDate("date_of_birth").toLocalDate();
                 String phone = rs.getString("phone");
-                Patient patient = new Patient(birthDate, new Credential( null, null, id), id, name, phone);
+                Patient patient = new Patient(birthDate, null, id, name, phone);
                 listaPatients.add(patient);
             }
         } catch (SQLException e) {

@@ -19,6 +19,8 @@ public class QuerysSQL {
     public static final String DELETE_PAYMENT = "DELETE FROM patient_payments where patient_id = ?";
     public static final String DELETE_PRESCRIBEDMEDICATION = "DELETE FROM prescribed_medications where record_id = ?";
     public static final String DELETE_APPOINTMENT = "DELETE FROM appointments where patient_id = ?";
+    public static final String SELECT_ALL_MEDRECORDS_BY_PATIENT = "SELECT * FROM medical_records WHERE patient_id = ?";
+    public static final String UPDATE_MEDRECORD = "UPDATE medical_records SET patient_id = ?, doctor_id = ?, diagnosis = ?, admission_date = ? WHERE record_id = ?";
 
     public QuerysSQL(){
     }

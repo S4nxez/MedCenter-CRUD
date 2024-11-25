@@ -1,6 +1,6 @@
 package com.hospitalcrud.dao.repositories.JDBC;
 
-import com.hospitalcrud.dao.mappers.DoctorRowMapper;
+import com.hospitalcrud.dao.mappers.JDBC.DoctorRowMapperJDBC;
 import com.hospitalcrud.dao.model.Doctor;
 import com.hospitalcrud.dao.repositories.DoctorRepository;
 import com.hospitalcrud.dao.repositories.JDBC.common.PoolDBConnection;
@@ -19,11 +19,11 @@ import java.util.List;
 public class DoctorRepositoryImpl implements DoctorRepository {
 
     private PoolDBConnection pool;
-    private DoctorRowMapper doctorRowMapper;
+    private DoctorRowMapperJDBC doctorRowMapperJDBC;
 
-    public DoctorRepositoryImpl(PoolDBConnection pool, DoctorRowMapper doctorRowMapper) {
+    public DoctorRepositoryImpl(PoolDBConnection pool, DoctorRowMapperJDBC doctorRowMapperJDBC) {
         this.pool = pool;
-        this.doctorRowMapper = doctorRowMapper;
+        this.doctorRowMapperJDBC = doctorRowMapperJDBC;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class DoctorRepositoryImpl implements DoctorRepository {
              Statement statement = connection.createStatement()){
             ResultSet rs = statement.executeQuery(QuerysSQL.GET_ALL_DOCTORS);
 
-            return doctorRowMapper.mapRow(rs);
+            return doctorRowMapperJDBC.mapRow(rs);
         }catch (SQLException e){
             throw new RuntimeException(e);
         }

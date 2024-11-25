@@ -31,7 +31,7 @@ public class TxtDoctorRepository implements com.hospitalcrud.dao.repositories.Do
                 );
 
                 doctors.add(doctor);
-                updateNextId(doctor.getId() + 1);
+                updateNextId(doctor.getDoctor_id() + 1);
             }
         } catch (IOException e) {
             e.printStackTrace();

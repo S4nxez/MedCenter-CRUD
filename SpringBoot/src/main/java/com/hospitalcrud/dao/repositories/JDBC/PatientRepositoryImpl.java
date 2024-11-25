@@ -1,6 +1,6 @@
 package com.hospitalcrud.dao.repositories.JDBC;
 
-import com.hospitalcrud.dao.mappers.PatientRowMapperJDBC;
+import com.hospitalcrud.dao.mappers.JDBC.PatientRowMapperJDBC;
 import com.hospitalcrud.dao.model.Patient;
 import com.hospitalcrud.dao.repositories.JDBC.common.PoolDBConnection;
 import com.hospitalcrud.dao.repositories.JDBC.common.QuerysSQL;
@@ -8,12 +8,14 @@ import com.hospitalcrud.dao.repositories.PatientRepository;
 import com.hospitalcrud.domain.errors.DuplicatedUserError;
 import com.hospitalcrud.domain.errors.ForeignKeyConstraintError;
 import com.hospitalcrud.utils.Constantes;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.List;
 
+@Slf4j
 @Repository
 @Profile("jdbc")
 public class PatientRepositoryImpl implements PatientRepository {
@@ -127,7 +129,7 @@ public class PatientRepositoryImpl implements PatientRepository {
                     PreparedStatement pstmtAppointment = con.prepareStatement(QuerysSQL.DELETE_APPOINTMENT);
                     PreparedStatement pstmtMedRecord = con.prepareStatement(QuerysSQL.DELETE_MED_RECORDS_BY_PATIENT);
                     PreparedStatement pstmtPayment = con.prepareStatement(QuerysSQL.DELETE_PAYMENT);
-                    PreparedStatement pstmtPrescribedMed = con.prepareStatement(QuerysSQL.DELETE_PRESCRIBEDMEDICATION);
+                    PreparedStatement pstmtPrescribedMed = con.prepareStatement(QuerysSQL.DELETE_PRESCRIBEDMEDICATION); //todo HACER UN JOIN PORQUE AQUI SOLO LE ESTOY PASANDO UN ID
                     PreparedStatement pstmtUserLogin = con.prepareStatement(QuerysSQL.DELETE_USER_LOGIN);
                     PreparedStatement pstmtPatient = con.prepareStatement(QuerysSQL.DELETE_PATIENT)
             ) {
@@ -151,6 +153,7 @@ public class PatientRepositoryImpl implements PatientRepository {
             } catch (SQLIntegrityConstraintViolationException e) {
                 con.rollback();
                 throw new ForeignKeyConstraintError("Unable to delete because another element depends on it");
+                //TODO log.error("ERROR"); esto si el user tiene datos tiene que mandar un mensaje de que si efectivamente quiere borrarlos y si dice que si y manda el confirm a true entonces borrar
             } catch (SQLException e) {
                 con.rollback();
                 throw new RuntimeException("Error while deleting", e);

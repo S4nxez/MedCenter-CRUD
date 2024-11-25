@@ -1,6 +1,6 @@
 package com.hospitalcrud.dao.repositories.JDBC;
 
-import com.hospitalcrud.dao.mappers.MedRecordRowMapper;
+import com.hospitalcrud.dao.mappers.JDBC.MedRecordRowMapperJDBC;
 import com.hospitalcrud.dao.model.MedRecord;
 import com.hospitalcrud.dao.repositories.JDBC.common.PoolDBConnection;
 import com.hospitalcrud.dao.repositories.JDBC.common.QuerysSQL;
@@ -16,9 +16,9 @@ import java.util.List;
 public class MedRecordRepositoryImpl implements MedRecordRepository {
 
     private PoolDBConnection pool;
-    private MedRecordRowMapper rowMapper;
+    private MedRecordRowMapperJDBC rowMapper;
 
-    public MedRecordRepositoryImpl(PoolDBConnection pool, MedRecordRowMapper rowMapper) {
+    public MedRecordRepositoryImpl(PoolDBConnection pool, MedRecordRowMapperJDBC rowMapper) {
         this.pool = pool;
         this.rowMapper = rowMapper;
     }

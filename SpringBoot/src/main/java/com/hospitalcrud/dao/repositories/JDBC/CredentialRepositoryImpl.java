@@ -1,6 +1,6 @@
 package com.hospitalcrud.dao.repositories.JDBC;
 
-import com.hospitalcrud.dao.mappers.CredentialRowMapper;
+import com.hospitalcrud.dao.mappers.JDBC.CredentialRowMapperJDBC;
 import com.hospitalcrud.dao.model.Credential;
 import com.hospitalcrud.dao.repositories.CredentialRepository;
 import com.hospitalcrud.dao.repositories.JDBC.common.PoolDBConnection;
@@ -10,15 +10,14 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 @Profile("jdbc")
 public class CredentialRepositoryImpl implements CredentialRepository {
     private PoolDBConnection pool;
-    private CredentialRowMapper rowMapper;
+    private CredentialRowMapperJDBC rowMapper;
 
-    public CredentialRepositoryImpl(PoolDBConnection pool, CredentialRowMapper doctorRowMapper) {
+    public CredentialRepositoryImpl(PoolDBConnection pool, CredentialRowMapperJDBC doctorRowMapper) {
         this.pool = pool;
         this.rowMapper = doctorRowMapper;
     }
@@ -26,9 +25,9 @@ public class CredentialRepositoryImpl implements CredentialRepository {
     @Override
     public List<Credential> getAll() {
         try (Connection connection = pool.getConnection();
-             Statement Statement = connection.createStatement()) {
+             Statement statement = connection.createStatement()) {
 
-            ResultSet rs = Statement.executeQuery(QuerysSQL.GET_ALL_CREDENTIALS);
+            ResultSet rs = statement.executeQuery(QuerysSQL.GET_ALL_CREDENTIALS);
 
             return rowMapper.mapRow(rs);
         } catch (SQLException e) {

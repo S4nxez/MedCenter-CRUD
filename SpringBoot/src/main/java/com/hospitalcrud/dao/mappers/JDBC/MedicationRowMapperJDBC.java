@@ -1,4 +1,4 @@
-package com.hospitalcrud.dao.mappers;
+package com.hospitalcrud.dao.mappers.JDBC;
 
 import com.hospitalcrud.dao.model.Medication;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class MedicationRowMapper {
+public class MedicationRowMapperJDBC {
     public List<Medication> mapRow(ResultSet rs) throws SQLException {
         List<Medication> lista = new ArrayList<>();
 

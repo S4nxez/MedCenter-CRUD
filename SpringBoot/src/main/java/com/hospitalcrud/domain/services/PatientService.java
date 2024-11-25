@@ -40,7 +40,7 @@ public class PatientService {
 
    public int add(PatientUI patientui) {
         Patient patient=new Patient(patientui.getBirthDate(),
-                new Credential(patientui.getUserName(), patientui.getPassword(), patientui.getId()),
+                new Credential(2,patientui.getUserName(), patientui.getPassword(),2, patientui.getId()),
                 patientui.getId(),patientui.getName(),patientui.getPhone());
 
         return patientRepository.add(patient);

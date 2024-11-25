@@ -19,7 +19,7 @@ public class DoctorService {
 
         List<Doctor> doctors= doctorRepository.getAll();
         List<DoctorUI> doctorUIs = doctors.stream()
-                .map(doctor -> new DoctorUI(doctor.getId(), doctor.getName()))
+                .map(doctor -> new DoctorUI(doctor.getDoctor_id(), doctor.getName()))
                 .toList();
         return doctorUIs;
     }
