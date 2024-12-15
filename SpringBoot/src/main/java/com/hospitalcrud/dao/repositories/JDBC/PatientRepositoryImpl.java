@@ -53,26 +53,22 @@ public class PatientRepositoryImpl implements PatientRepository {
                          QuerysSQL.INSERT_INTO_CREDENTIALS_USERNAME_PASSWORD_VALUES)) {
 
                 patientStatement.setString(1, patient.getName());
-                patientStatement.setDate(2, java.sql.Date.valueOf(patient.getBirthDate()));
+                patientStatement.setDate(2, Date.valueOf(patient.getBirthDate()));
                 patientStatement.setString(3, patient.getPhone());
+                patientStatement.executeUpdate();
 
-                if (patientStatement.executeUpdate() == 0) {
-                    throw new SQLException(Constantes.CREATING_PATIENT_FAILED_NO_ROWS_AFFECTED);
-                }
+
 
                 try (ResultSet generatedKeys = patientStatement.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
+                        generatedKeys.next();
                         generatedPatientId = generatedKeys.getInt(1);
-                    } else {
-                        throw new SQLException(QuerysSQL.CREATING_PATIENT_FAILED_NO_ID_OBTAINED);
-                    }
+
                 }
 
                 if (patient.getCredential() != null) {
                     credentialStatement.setString(1, patient.getCredential().getUsername());
                     credentialStatement.setString(2, patient.getCredential().getPassword());
                     credentialStatement.setInt(3, generatedPatientId);
-                    credentialStatement.setNull(4, java.sql.Types.INTEGER);
                     credentialStatement.executeUpdate();
                 }
 

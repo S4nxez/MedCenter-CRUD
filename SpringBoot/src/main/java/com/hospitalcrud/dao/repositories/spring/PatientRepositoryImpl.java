@@ -89,7 +89,7 @@ public class PatientRepositoryImpl implements PatientRepository {
                     .param(1, idDelete)
                     .update();
         } catch (DataIntegrityViolationException e) {
-            throw new ForeignKeyConstraintError("¿Desea eliminar los MedRecord, Payments y Credentials del Usuario?");
+            throw new ForeignKeyConstraintError("Delete everything related to the patient?");
         }
     }
 }

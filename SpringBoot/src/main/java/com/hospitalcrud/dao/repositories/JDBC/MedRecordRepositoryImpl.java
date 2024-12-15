@@ -15,12 +15,14 @@ import java.util.List;
 @Profile("jdbc")
 public class MedRecordRepositoryImpl implements MedRecordRepository {
 
+    private final MedicationRepositoryImpl medicationRepositoryImpl;
     private PoolDBConnection pool;
     private MedRecordRowMapperJDBC rowMapper;
 
-    public MedRecordRepositoryImpl(PoolDBConnection pool, MedRecordRowMapperJDBC rowMapper) {
+    public MedRecordRepositoryImpl(PoolDBConnection pool, MedRecordRowMapperJDBC rowMapper, MedicationRepositoryImpl medicationRepositoryImpl) {
         this.pool = pool;
         this.rowMapper = rowMapper;
+        this.medicationRepositoryImpl = medicationRepositoryImpl;
     }
 
     @Override
@@ -39,34 +41,35 @@ public class MedRecordRepositoryImpl implements MedRecordRepository {
     @Override
     public int add(MedRecord medRecord) {
         try (Connection connection = pool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    QuerysSQL.INSERT_INTO_MEDICAL_RECORDS,
-                    Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     QuerysSQL.INSERT_INTO_MEDICAL_RECORDS,
+                     Statement.RETURN_GENERATED_KEYS)) {
 
-                preparedStatement.setInt(1, medRecord.getIdPatient());
-                preparedStatement.setInt(2, medRecord.getIdDoctor());
-                preparedStatement.setString(3, medRecord.getDiagnosis());
-                preparedStatement.setDate(4, Date.valueOf(medRecord.getDate()));
+            preparedStatement.setInt(1, medRecord.getIdPatient());
+            preparedStatement.setInt(2, medRecord.getIdDoctor());
+            preparedStatement.setString(3, medRecord.getDiagnosis());
+            preparedStatement.setDate(4, Date.valueOf(medRecord.getDate()));
+            medRecord.getMedications().forEach(medication -> {
+                medicationRepositoryImpl.add(medication);
+            });
+            if (preparedStatement.executeUpdate() == 0)
+                throw new SQLException("Creating error, no rows affected");
 
-                if (preparedStatement.executeUpdate() == 0)
-                    throw new SQLException("Creating error, no rows affected");
-
-                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-                if (generatedKeys.next())
-                    return generatedKeys.getInt(1);
-                else
-                    throw new SQLException("Error generating id");
-            } catch (SQLException e) {
-                throw new RuntimeException("Error adding medrecord", e);
-            }
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next())
+                return generatedKeys.getInt(1);
+            else
+                throw new SQLException("Error generating id");
+        } catch (SQLException e) {
+            throw new RuntimeException("Error adding medrecord", e);
+        }
     }
-
 
 
     @Override
     public void delete(int id) {
         try (Connection connection = pool.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(QuerysSQL.DELETE_FROM_MED_RECORD)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(QuerysSQL.DELETE_FROM_MED_RECORD)) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

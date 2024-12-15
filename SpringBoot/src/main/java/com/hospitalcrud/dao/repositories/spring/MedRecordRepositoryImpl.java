@@ -49,7 +49,7 @@ public class MedRecordRepositoryImpl implements MedRecordRepository {
                 .param(3,medRecord.getDiagnosis())
                 .param(4,medRecord.getDate())
                 .update(keyHolder);
-        int newId = Objects.requireNonNull(keyHolder.getKey(), "Key was not generated").intValue();
+        int newId = Objects.requireNonNull(keyHolder.getKey(), "Key not generated").intValue();
         medRecord.setId(newId);
         medRecord.getMedications().forEach(medication -> medication.setMedRecordId(newId));
         medRecord.getMedications().forEach(medicationRepository::add);

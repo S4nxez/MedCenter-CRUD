@@ -13,9 +13,9 @@ public class StaticDoctorRepository implements com.hospitalcrud.dao.repositories
     private List<Doctor> doctorList = new ArrayList<>();
 
     public List<Doctor> getAll() {
-        doctorList.add(new Doctor(1, "Diego", "Cardiology"));
-        doctorList.add(new Doctor(2, "Pepa", "Neurology"));
-        doctorList.add(new Doctor(3, "Susan", "Pediatrics"));
+        doctorList.add(new Doctor(1, "Javi ", "Generic"));
+        doctorList.add(new Doctor(2, "Dani", "Psychiatry"));
+        doctorList.add(new Doctor(3, "Marta", "Pediatrics"));
 
         return doctorList;
     }

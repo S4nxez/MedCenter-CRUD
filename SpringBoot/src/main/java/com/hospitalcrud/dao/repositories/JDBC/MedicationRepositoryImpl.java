@@ -38,4 +38,20 @@ public class MedicationRepositoryImpl implements MedicationRepository {
             throw new RuntimeException("Error getting medications", e);
         }
     }
+
+    public void add(Medication medication){
+        try (Connection connection = pool.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement(QuerysSQL.INSERT_INTO_MEDICATIONS)) {
+
+            preparedStatement.setInt(1, medication.getMedRecordId());
+            preparedStatement.setString(2, medication.getMedicationName());
+            preparedStatement.setString(3, "0mg");
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error adding medication", e);
+        }
+
+    }
 }
