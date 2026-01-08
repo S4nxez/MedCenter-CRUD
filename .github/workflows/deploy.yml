@@ -12,14 +12,15 @@ jobs:
         uses: tailscale/github-action@v2
         with:
           oauth-client-id: ${{ secrets.CLIENT_ID }}
-          oauth-client-secret: ${{ secrets.CLIENT_SECRET }}
+          oauth-secret: ${{ secrets.CLIENT_SECRET }}
           tags: tag:ci
+          version: 1.42.0
 
       - name: Trust SSH host
         run: |
           mkdir -p ~/.ssh
-            ssh-keyscan -H 100.68.170.113 >> ~/.ssh/known_hosts
-    
+          ssh-keyscan -H 100.68.170.113 >> ~/.ssh/known_hosts
+
       - name: Deploy
         run: |
           ssh sanxez@100.68.170.113 \
