@@ -15,5 +15,5 @@ jobs:
 
       - name: Deploy
         run: |
-          ssh pi@100.86.23.14 \
+          ssh sanxez@100.68.170.113 \
             "podman auto-update --rollback"
