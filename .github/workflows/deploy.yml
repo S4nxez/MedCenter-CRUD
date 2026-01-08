@@ -13,6 +13,11 @@ jobs:
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
 
+      - name: Trust SSH host
+        run: |
+          mkdir -p ~/.ssh
+            ssh-keyscan -H 100.68.170.113 >> ~/.ssh/known_hosts
+    
       - name: Deploy
         run: |
           ssh sanxez@100.68.170.113 \
