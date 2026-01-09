@@ -31,11 +31,11 @@ jobs:
         run: |
           cd SpringBoot
           mvn clean package -DskipTests
-          docker build -t ghcr.io/s4nxez/medcenter-back:latest .
+          docker build -f Containerfile -t ghcr.io/s4nxez/medcenter-back:latest .
           docker push ghcr.io/s4nxez/medcenter-back:latest
 
       - name: Build frontend
         run: |
           cd ClienteJS
-          docker build -t ghcr.io/s4nxez/medcenter-front:latest .
+          docker build -f Containerfile -t ghcr.io/s4nxez/medcenter-front:latest .
           docker push ghcr.io/s4nxez/medcenter-front:latest
