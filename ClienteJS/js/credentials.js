@@ -31,7 +31,13 @@ if (response.ok) {
     return response.text(); // Leemos el cuerpo de la respuesta
 } else {
     // Si la respuesta HTTP no fue exitosa, lanzamos un error
-    throw new Error('Network response was not ok.');
+		if (response.status === 409) {
+			return response.text().then(eMessage => {
+				document.getElementById("WrongCred").innerHTML = eMessage;
+				})}
+		// Autenticación fallida
+		else
+    	throw new Error('Network response was not ok.');
 }
 })
 .then(data => {
@@ -40,13 +46,11 @@ if (data == "true") {
     // Autenticación exitosa, abrimos la página principal
     window.location.href = "mainPage.html"; // Redirigir a main.html
     document.getElementById("WrongCred").innerHTML = "";
-} else {
-    // Autenticación fallida
-    document.getElementById("WrongCred").innerHTML = "Invalid username or password";
 }
 })
 .catch(error => {
 // Manejar errores de la solicitud
+
 console.error('Error al realizar la solicitud:', error);
 });
 }

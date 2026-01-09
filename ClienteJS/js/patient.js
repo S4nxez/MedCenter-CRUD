@@ -123,14 +123,12 @@ function addPatient(event) {
                     let resp = alert(eMessage);
                     throw new Error('Username duplicated');
 
-
                     })}
                     else {
                         // El usuario canceló, lanzar un error
                         throw new Error('User cancelled operation');
                     }
             }
-
         return response.json();
     })
         .then(data => {

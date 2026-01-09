@@ -40,6 +40,4 @@ public class RestPatient {
     public void update(@RequestBody  PatientUI patientUI){
         patientService.update(patientUI);
     }
-
-
 }
