@@ -17,7 +17,7 @@ password: p
 };
 
 // Realizar la solicitud POST
-fetch("http://localhost:8080/login", {
+fetch("http://backend:8080/login", {
 method: 'POST',
 headers: {
     'Content-Type': 'application/json'

@@ -1,7 +1,7 @@
 
 //GET ALL
 function getAllpatients() {
-    fetch("http://localhost:8080/patients")
+    fetch("http://backend:8080/patients")
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -34,7 +34,7 @@ function deletePatient(button) {
     // Función para enviar la solicitud DELETE al servidor
     function sendDeleteRequest(confirmation) {
         // Delete the patient from the server
-        fetch(`http://localhost:8080/patients/${patientId}?confirm=${confirmation}`, {
+        fetch(`http://backend:8080/patients/${patientId}?confirm=${confirmation}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -105,7 +105,7 @@ function addPatient(event) {
     };
 
     // Send a fetch request to add the patient to the server
-	fetch("http://localhost:8080/patients", {
+	fetch("http://backend:8080/patients", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -170,7 +170,7 @@ function updatePatient(event) {
     };
 
     // Send a fetch request to update the patient on the server
-	fetch("http://localhost:8080/patients", {
+	fetch("http://backend:8080/patients", {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
