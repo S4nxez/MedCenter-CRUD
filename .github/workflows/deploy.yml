@@ -1,8 +1,10 @@
 name: Deploy
 
 on:
-  push:
-    branches: [ master ]
+  workflow_run:
+    workflows: ["Build Images"]
+    types:
+      - completed
 
 jobs:
   deploy:
@@ -26,4 +28,4 @@ jobs:
       - name: Deploy
         run: |
           ssh sanxez@100.68.170.113 \
-            "podman auto-update --rollback"
+            "cd /opt/medcenter && podman pull ghcr.io/s4nxez/medcenter-back:latest && podman-compose up -d"
