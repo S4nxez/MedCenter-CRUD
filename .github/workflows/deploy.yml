@@ -26,4 +26,5 @@ jobs:
       - name: Deploy
         run: |
           ssh sanxez@100.68.170.113 \
-            "podman auto-update --rollback"
+            "podman pull ghcr.io/s4nxez/medcenter-back:latest && podman-compose up -d"
+
