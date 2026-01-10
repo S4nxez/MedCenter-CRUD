@@ -8,8 +8,4 @@
     <entry key="lastIdPatient">9</entry>
     <entry key="lastIdDoctor">6</entry>
     <entry key="lastIdMedRecord">2</entry>
-    <entry key="urlDB">jdbc:mysql://localhost:3306/Hospital</entry>
-    <entry key="user_name">root</entry>
-    <entry key="password">root</entry>
-    <entry key="driver">com.mysql.cj.jdbc.Driver</entry>
 </properties>
