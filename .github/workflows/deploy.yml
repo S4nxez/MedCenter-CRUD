@@ -27,5 +27,9 @@ jobs:
 
       - name: Deploy
         run: |
-          ssh sanxez@100.68.170.113 \
-            "cd /opt/medcenter && podman pull ghcr.io/s4nxez/medcenter-back:latest && podman-compose up -d"
+          ssh sanxez@100.68.170.113 "
+            cd /opt/medcenter &&
+            podman pull ghcr.io/s4nxez/medcenter-back:latest &&
+            podman pull ghcr.io/s4nxez/medcenter-front:latest &&
+            podman-compose up -d --force-recreate
+          "
