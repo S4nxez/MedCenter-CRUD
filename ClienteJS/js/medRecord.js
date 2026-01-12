@@ -4,12 +4,12 @@ function getInfo(button) {
     var patientId = row.querySelector('td:first-child').innerText.trim(); // Obtiene el ID del estudiante
     var patientName = row.querySelector('td:nth-child(2)').innerText.trim(); // Obtiene el nombre del estudiante
 
-    // Realiza una solicitud Fetch al servidor para obtener los medRecords del alumno
-    fetch(`http://backend:8080/patients/${patientId}/medRecords`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+  // Realiza una solicitud Fetch al servidor para obtener los medRecords del alumno
+  fetch(`/api/patients/${patientId}/medRecords`)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
         return response.json();
     })
         .then(data => {
@@ -49,7 +49,7 @@ function deleteApp(button) {
     var appId = row.querySelector('td:first-child').innerText.trim(); // Obtiene el contenido del primer <td> de la fila
 
     // Delete the patient from the server
-    fetch(`http://backend:8080/patients/medRecords/${appId}`, {
+    fetch(`/api/patients/medRecords/${appId}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -94,7 +94,7 @@ function updateMedRecord(event) {
     };
 
     // Send a fetch request to update the medRecord on the server
-    fetch('http://backend:8080/patients/medRecords', {
+    fetch('/api/patients/medRecords', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -166,9 +166,6 @@ function showUpdateMedRecordModalW(button) {
     document.getElementById("updateMedRecordDate").value = appDate;
     document.getElementById("updateMedRecordIdPatient").value = appIdPatient;
 
-    //fillDoctorCombo('updateMedRecordIdDoctor');
-    //document.getElementById("updateMedRecordIdDoctor").value = appIdDoctor;
-    //Si se ponen las lineas de arriba, no selecciona el profesor adecuado porque fillDoctorCombo es asincrona y no ha
     //terminado de cargar. Hay que hacerlo de la siguiente forma:
     fillDoctorCombo('updateMedRecordIdDoctor', function () {
         // Esta función se ejecutará después de que el combo se haya llenado completamente
@@ -219,7 +216,7 @@ function addMedRecord(event) {
     };
 
     // Send a fetch request to add the patient to the server
-    fetch("http://backend:8080/patients/medRecords", {
+    fetch("/api/patients/medRecords", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -267,7 +264,7 @@ function showAddMedRecordModalW(event) {
 //fillDoctorCombo: callback es una función que se llama desde esta funcion, para asegurarnos que ha cargado el combo antes
 function fillDoctorCombo(combo, callback) {
 
-    fetch('http://backend:8080/doctors')
+    fetch('/api/doctors')
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');

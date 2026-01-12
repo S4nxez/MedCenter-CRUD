@@ -1,7 +1,6 @@
-
 //GET ALL
 function getAllpatients() {
-    fetch("http://backend:8080/patients")
+    fetch("/api/patients")
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -24,7 +23,6 @@ function getAllpatients() {
         });
 }
 
-
 // DELETE PATIENT
 function deletePatient(button) {
     var row = button.parentNode.parentNode;
@@ -34,8 +32,8 @@ function deletePatient(button) {
     // Función para enviar la solicitud DELETE al servidor
     function sendDeleteRequest(confirmation) {
         // Delete the patient from the server
-        fetch(`http://backend:8080/patients/${patientId}?confirm=${confirmation}`, {
-            method: 'DELETE',
+        fetch(`/api/patients/${patientId}?confirm=${confirmation}`, {
+            method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -43,7 +41,7 @@ function deletePatient(button) {
             .then(response => {
                 if (response.status === 204) {
                     // No content, successful deletion
-                    console.log('Patient deleted successfully');
+                    console.log("Patient deleted successfully");
                     row.parentNode.removeChild(row);
                     document.getElementById("infoContainer").innerHTML = "";
                     return;
@@ -79,8 +77,6 @@ function deletePatient(button) {
     }
 }
 
-
-
 // ADD PATIENT
 function addPatient(event) {
     event.preventDefault();
@@ -105,7 +101,7 @@ function addPatient(event) {
     };
 
     // Send a fetch request to add the patient to the server
-	fetch("http://backend:8080/patients", {
+	fetch("/api/patients", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -170,7 +166,7 @@ function updatePatient(event) {
     };
 
     // Send a fetch request to update the patient on the server
-	fetch("http://backend:8080/patients", {
+	fetch("/api/patients", {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -320,9 +316,6 @@ function createPatientRow_LongVersion(patient) {
 
     return row;
 }
-
-
-
 
 // Call the function when the DOM is ready
 document.addEventListener("DOMContentLoaded", function () {
