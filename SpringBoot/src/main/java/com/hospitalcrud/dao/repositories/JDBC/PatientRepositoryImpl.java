@@ -48,16 +48,15 @@ public class PatientRepositoryImpl implements PatientRepository {
 
             try (PreparedStatement patientStatement = connection.prepareStatement(
                     QuerysSQL.INSERT_INTO_PATIENTS_NAME_DATE_OF_BIRTH_PHONE_VALUES,
-                    Statement.RETURN_GENERATED_KEYS);
-                 PreparedStatement credentialStatement = connection.prepareStatement(
-                         QuerysSQL.INSERT_INTO_CREDENTIALS_USERNAME_PASSWORD_VALUES)) {
-
+                    Statement.RETURN_GENERATED_KEYS
+            );
+            PreparedStatement credentialStatement = connection.prepareStatement(
+                         QuerysSQL.INSERT_INTO_CREDENTIALS_USERNAME_PASSWORD_VALUES)
+            ) {
                 patientStatement.setString(1, patient.getName());
                 patientStatement.setDate(2, Date.valueOf(patient.getBirthDate()));
                 patientStatement.setString(3, patient.getPhone());
                 patientStatement.executeUpdate();
-
-
 
                 try (ResultSet generatedKeys = patientStatement.getGeneratedKeys()) {
                         generatedKeys.next();

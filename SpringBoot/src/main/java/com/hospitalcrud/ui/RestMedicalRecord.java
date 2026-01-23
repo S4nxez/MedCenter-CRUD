@@ -15,15 +15,11 @@ public class RestMedicalRecord {
         this.medRecordService = medRecordService;
     }
 
-    //Find patient medRecords
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
     @GetMapping("/patients/{idPatient}/medRecords")
     public List<MedRecordUI> getAll(@PathVariable int idPatient)  {
         return medRecordService.getAll(idPatient);
     }
 
-    //Add
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PostMapping("/patients/medRecords")
     public int addMedRecord(@RequestBody MedRecordUI medRecordui) {
 
@@ -31,8 +27,6 @@ public class RestMedicalRecord {
 
     }
 
-    //Delete
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
     @DeleteMapping("/patients/medRecords/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteMedRecord(@PathVariable int id) {
@@ -40,8 +34,6 @@ public class RestMedicalRecord {
         medRecordService.delete(id);
     }
 
-    //Update
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PutMapping("/patients/medRecords")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateMedRecord(@RequestBody MedRecordUI medRecordUI) {

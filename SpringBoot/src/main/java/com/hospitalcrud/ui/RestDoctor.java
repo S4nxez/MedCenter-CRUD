@@ -18,7 +18,6 @@ public class RestDoctor {
         this.doctorService = doctorService;
     }
 
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
     @GetMapping("/doctors")
     public List<DoctorUI> index() {
         return doctorService.getAll();

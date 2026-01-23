@@ -16,7 +16,6 @@ public class RestCredentials {
         this.credentialService = credentialService;
     }
 
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PostMapping("/login")
     public boolean getCredential(@RequestBody CredentialUI credentialui){
         return  credentialService.get(credentialui);

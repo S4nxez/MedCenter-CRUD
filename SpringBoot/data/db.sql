@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS Hospital;
+USE Hospital;
+
 CREATE TABLE patients (
                           patient_id INT NOT NULL AUTO_INCREMENT,
                           name VARCHAR(50) NOT NULL,
