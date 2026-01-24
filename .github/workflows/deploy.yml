@@ -27,7 +27,7 @@ jobs:
 
       - name: Deploy
         run: |
-          ssh \
+          ssh -n \
             -o BatchMode=yes \
             -o StrictHostKeyChecking=no \
             -o ConnectTimeout=10 \
@@ -36,5 +36,7 @@ jobs:
              podman pull ghcr.io/s4nxez/medcenter-back:latest && \
              podman pull ghcr.io/s4nxez/medcenter-front:latest && \
              podman-compose up -d --force-recreate && \
-             echo DEPLOY_OK"
+             echo DEPLOY_OK && \
+             exit"
+
 
