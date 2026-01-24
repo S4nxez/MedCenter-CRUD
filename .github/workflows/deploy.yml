@@ -27,16 +27,19 @@ jobs:
 
       - name: Deploy
         run: |
-          ssh -n \
+          set -euo pipefail
+          timeout 5m ssh -n \
             -o BatchMode=yes \
             -o StrictHostKeyChecking=no \
             -o ConnectTimeout=10 \
+            -o ServerAliveInterval=30 \
+            -o ServerAliveCountMax=3 \
             sanxez@100.68.170.113 \
             "cd /opt/medcenter && \
              podman pull ghcr.io/s4nxez/medcenter-back:latest && \
              podman pull ghcr.io/s4nxez/medcenter-front:latest && \
              podman-compose up -d --force-recreate && \
-             echo DEPLOY_OK && \
-             exit"
+             echo DEPLOY_OK"
+
 
 
