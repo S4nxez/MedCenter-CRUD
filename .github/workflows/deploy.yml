@@ -29,30 +29,26 @@ jobs:
         run: |
           set -euo pipefail
       
-          (
-            timeout 5m ssh -T -n \
-              -o BatchMode=yes \
-              -o StrictHostKeyChecking=no \
-              -o ConnectTimeout=10 \
-              -o ServerAliveInterval=30 \
-              -o ServerAliveCountMax=3 \
-              sanxez@100.68.170.113 \
-              "cd /opt/medcenter && \
-               podman pull ghcr.io/s4nxez/medcenter-back:latest && \
-               podman pull ghcr.io/s4nxez/medcenter-front:latest && \
-               podman-compose up -d --force-recreate > /dev/null 2>&1 && \
-               echo DEPLOY_OK"
-          )
+          set +e
+          timeout 5m ssh -T -n \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=no \
+            -o ConnectTimeout=10 \
+            -o ServerAliveInterval=30 \
+            -o ServerAliveCountMax=3 \
+            sanxez@100.68.170.113 \
+            "cd /opt/medcenter && \
+             podman pull ghcr.io/s4nxez/medcenter-back:latest && \
+             podman pull ghcr.io/s4nxez/medcenter-front:latest && \
+             podman-compose up -d --force-recreate > /dev/null 2>&1 && \
+             echo DEPLOY_OK"
           STATUS=$?
+          set -e
       
-          if [ $STATUS -eq 124 ]; then
-            echo "SSH timeout terminado, deploy OK"
+          if [ "$STATUS" -eq 124 ]; then
+            echo "Timeout alcanzado: deploy considerado correcto"
             exit 0
-          elif [ $STATUS -ne 0 ]; then
-            echo "Error en el deploy, código $STATUS"
-            exit $STATUS
+          elif [ "$STATUS" -ne 0 ]; then
+            echo "Error real en el deploy, código $STATUS"
+            exit "$STATUS"
           fi
-
-
-
-
