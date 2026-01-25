@@ -1,6 +1,6 @@
 //GET ALL
 function getAllpatients() {
-    fetch("/api/patients")
+    authService.fetchWithToken("/api/patients")
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -32,7 +32,7 @@ function deletePatient(button) {
     // Función para enviar la solicitud DELETE al servidor
     function sendDeleteRequest(confirmation) {
         // Delete the patient from the server
-        fetch(`/api/patients/${patientId}?confirm=${confirmation}`, {
+        authService.fetchWithToken(`/api/patients/${patientId}?confirm=${confirmation}`, {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json'
@@ -101,7 +101,7 @@ function addPatient(event) {
     };
 
     // Send a fetch request to add the patient to the server
-	fetch("/api/patients", {
+	authService.fetchWithToken("/api/patients", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -166,7 +166,7 @@ function updatePatient(event) {
     };
 
     // Send a fetch request to update the patient on the server
-	fetch("/api/patients", {
+	authService.fetchWithToken("/api/patients", {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -330,5 +330,13 @@ document.addEventListener("DOMContentLoaded", function () {
         var addpatientModal = new bootstrap.Modal(document.getElementById('addpatientModal'));
         addpatientModal.show();
     });
+
+    // Logout button handler
+    var logoutButton = document.getElementById("logoutButton");
+    if (logoutButton) {
+        logoutButton.addEventListener("click", function () {
+            logout();
+        });
+    }
 
 });

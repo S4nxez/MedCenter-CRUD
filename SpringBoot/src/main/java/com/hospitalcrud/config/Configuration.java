@@ -1,6 +1,6 @@
 package com.hospitalcrud.config;
 
-import com.hospitalcrud.utils.Constantes;
+import com.hospitalcrud.utils.Constants;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class Configuration {
     private Configuration() {
         try {
             p = new Properties();
-            p.loadFromXML(Configuration.class.getClassLoader().getResourceAsStream(Constantes.CONFIG_XML));
+            p.loadFromXML(Configuration.class.getClassLoader().getResourceAsStream(Constants.CONFIG_XML));
         } catch (IOException e) {
             e.printStackTrace();
         }

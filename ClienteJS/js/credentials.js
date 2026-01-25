@@ -1,56 +1,55 @@
 document.getElementById("bCheck").addEventListener("click", function (event) {
+    event.preventDefault();
 
-    // Get username and password from the form
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
 
     getCredentials(username, password)
-
 })
 
-//Function to get the Credentials (with POST)
 function getCredentials(u, p) {
-  // Obtener los datos del formulario o crear un objeto con los datos del estudiante
   let cred = {
     username: u,
     password: p,
   };
 
-  // Realizar la solicitud POST
   fetch("/api/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(cred), // Convertir datos a JSON y enviar en el cuerpo de la solicitud
+    body: JSON.stringify(cred),
   })
     .then((response) => {
-      // Manejar la respuesta
       if (response.ok) {
-        // Si la respuesta HTTP fue exitosa, leemos el cuerpo de la respuesta
-        return response.text(); // Leemos el cuerpo de la respuesta
+        return response.json();
       } else {
-        // Si la respuesta HTTP no fue exitosa, lanzamos un error
-        if (response.status === 409) {
-          return response.text().then((eMessage) => {
-            document.getElementById("WrongCred").innerHTML = eMessage;
-          });
+        if (response.status === 401) {
+          document.getElementById("WrongCred").textContent = "Invalid credentials";
+          throw new Error("Invalid credentials");
         }
-        // Autenticación fallida
-        else throw new Error("Network response was not ok.");
+        throw new Error("Network response was not ok.");
       }
     })
     .then((data) => {
-      // Manejar el contenido de la respuesta
-      if (data == "true") {
-        // Autenticación exitosa, abrimos la página principal
-        window.location.href = "mainPage.html"; // Redirigir a main.html
-        document.getElementById("WrongCred").innerHTML = "";
+      if (data && data.token && data.refreshToken) {
+        authService.saveTokens(data.token, data.refreshToken);
+
+        document.getElementById("WrongCred").textContent = "";
+        window.location.href = "mainPage.html";
+      } else {
+        document.getElementById("WrongCred").textContent = "Login failed";
       }
     })
     .catch((error) => {
-      // Manejar errores de la solicitud
-
       console.error("Error al realizar la solicitud:", error);
+      if (!document.getElementById("WrongCred").textContent) {
+        document.getElementById("WrongCred").textContent = "Login error. Please try again.";
+      }
     });
+}
+
+function logout() {
+  authService.clearTokens();
+  window.location.href = "index.html";
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Profile("jdbc")
@@ -34,4 +35,23 @@ public class CredentialRepositoryImpl implements CredentialRepository {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public Optional<Credential> findByUsername(String username) {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     QuerysSQL.GET_CREDENTIAL_BY_USERNAME)) {
+
+            statement.setString(1, username);
+
+            ResultSet rs = statement.executeQuery();
+            List<Credential> result = rowMapper.mapRow(rs);
+
+            return result.isEmpty() ? Optional.empty() : Optional.of(result.getFirst());
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

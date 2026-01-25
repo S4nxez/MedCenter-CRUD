@@ -4,7 +4,7 @@ import com.hospitalcrud.config.Configuration;
 import com.hospitalcrud.dao.mappers.PatientRowMapper;
 import com.hospitalcrud.dao.model.Patient;
 import com.hospitalcrud.dao.repositories.PatientRepository;
-import com.hospitalcrud.utils.Constantes;
+import com.hospitalcrud.utils.Constants;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
@@ -29,7 +29,7 @@ public class TxtPatientRepository implements PatientRepository {
     public List<Patient> getAll() {
         List<Patient> patients = new ArrayList<>();
 
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get(Configuration.getInstance().getProperty(Constantes.PATH_PATIENTS)))) {
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get(Configuration.getInstance().getProperty(Constants.PATH_PATIENTS)))) {
             reader.lines().toList().forEach(line -> {
                 Patient patient = patientRowMapper.mapRow(line);
                 patients.add(patient);
@@ -59,7 +59,7 @@ public class TxtPatientRepository implements PatientRepository {
         try {
             List<String> lines = patients.stream()
                     .map(patientRowMapper::toStringTextFile).toList();
-            Files.write(Paths.get(Configuration.getInstance().getProperty(Constantes.PATH_PATIENTS)), lines);
+            Files.write(Paths.get(Configuration.getInstance().getProperty(Constants.PATH_PATIENTS)), lines);
         } catch (IOException e) {
             log.error("Error writing patients file: " + e.getMessage());
             ret = false;
@@ -73,7 +73,7 @@ public class TxtPatientRepository implements PatientRepository {
 
         patients.replaceAll(p -> p.getId() == patientDatabase.getId() ? patientDatabase : p);
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(Configuration.getInstance()
-                .getProperty(Constantes.PATH_PATIENTS)))) {
+                .getProperty(Constants.PATH_PATIENTS)))) {
             for (Patient p : patients) {
                 String line = patientRowMapper.toStringTextFile(p);
                 bw.write(line);
@@ -86,7 +86,7 @@ public class TxtPatientRepository implements PatientRepository {
 
     private int getNextId() {
         try {
-            return Integer.parseInt(Configuration.getInstance().getProperty(Constantes.LAST_ID_PATIENT));
+            return Integer.parseInt(Configuration.getInstance().getProperty(Constants.LAST_ID_PATIENT));
         } catch (NumberFormatException e) {
             log.error("Error parsing last patient ID: " + e.getMessage());
             return 1;
@@ -94,7 +94,7 @@ public class TxtPatientRepository implements PatientRepository {
     }
 
     private void updateNextId(int nextId) {
-        Configuration.getInstance().setProperty(Constantes.LAST_ID_PATIENT, String.valueOf(nextId));
+        Configuration.getInstance().setProperty(Constants.LAST_ID_PATIENT, String.valueOf(nextId));
     }
 
     @Override

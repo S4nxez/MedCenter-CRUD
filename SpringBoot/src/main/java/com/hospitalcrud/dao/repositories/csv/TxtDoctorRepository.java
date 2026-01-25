@@ -2,7 +2,7 @@ package com.hospitalcrud.dao.repositories.csv;
 
 import com.hospitalcrud.config.Configuration;
 import com.hospitalcrud.dao.model.Doctor;
-import com.hospitalcrud.utils.Constantes;
+import com.hospitalcrud.utils.Constants;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
@@ -21,7 +21,7 @@ public class TxtDoctorRepository implements com.hospitalcrud.dao.repositories.Do
         List<Doctor> doctors = new ArrayList<>();
         try {
             List<String> lines = java.nio.file.Files.readAllLines(java.nio.file.Paths
-                    .get(Configuration.getInstance().getProperty(Constantes.DOCTOR_PATH)));
+                    .get(Configuration.getInstance().getProperty(Constants.DOCTOR_PATH)));
             for (String line : lines) {
                 String[] values = line.split(";");
                 Doctor doctor = new Doctor(
@@ -40,7 +40,7 @@ public class TxtDoctorRepository implements com.hospitalcrud.dao.repositories.Do
     }
 
     private void updateNextId(int nextId) {
-        Configuration.getInstance().setProperty(Constantes.NEXT_DOCTOR_ID, String.valueOf(nextId));
+        Configuration.getInstance().setProperty(Constants.NEXT_DOCTOR_ID, String.valueOf(nextId));
     }
 
 }

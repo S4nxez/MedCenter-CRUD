@@ -7,7 +7,7 @@ import com.hospitalcrud.dao.repositories.JDBC.common.QuerysSQL;
 import com.hospitalcrud.dao.repositories.PatientRepository;
 import com.hospitalcrud.domain.errors.DuplicatedUserError;
 import com.hospitalcrud.domain.errors.ForeignKeyConstraintError;
-import com.hospitalcrud.utils.Constantes;
+import com.hospitalcrud.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
@@ -114,7 +114,7 @@ public class PatientRepositoryImpl implements PatientRepository {
     @Override
     public void delete(int id, boolean confirm) {
         if (!confirm) {
-            throw new IllegalArgumentException(Constantes.DELETE_OPERATION_NOT_CONFIRMED);
+            throw new IllegalArgumentException(Constants.DELETE_OPERATION_NOT_CONFIRMED);
         }
 
         try (Connection con = pool.getConnection()) {

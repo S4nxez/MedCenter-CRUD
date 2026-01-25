@@ -4,7 +4,7 @@ import com.hospitalcrud.config.Configuration;
 import com.hospitalcrud.dao.model.MedRecord;
 import com.hospitalcrud.dao.model.MedRecordListWrapper;
 import com.hospitalcrud.dao.repositories.MedRecordRepository;
-import com.hospitalcrud.utils.Constantes;
+import com.hospitalcrud.utils.Constants;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +22,7 @@ import java.util.List;
 public class XmlMedRecordRepository implements MedRecordRepository {
 
     private List<MedRecord> loadAllMedRecords() throws JAXBException {
-        File file = new File(Configuration.getInstance().getProperty(Constantes.MED_RECORD_PATH));
+        File file = new File(Configuration.getInstance().getProperty(Constants.MED_RECORD_PATH));
 
         if (!file.exists())
             return new ArrayList<>();
@@ -40,7 +40,7 @@ public class XmlMedRecordRepository implements MedRecordRepository {
 
         MedRecordListWrapper wrapper = new MedRecordListWrapper();
         wrapper.setMedRecords(medRecords);
-        marshaller.marshal(wrapper, new File(Configuration.getInstance().getProperty(Constantes.MED_RECORD_PATH)));
+        marshaller.marshal(wrapper, new File(Configuration.getInstance().getProperty(Constants.MED_RECORD_PATH)));
     }
 
     @Override
@@ -72,11 +72,11 @@ public class XmlMedRecordRepository implements MedRecordRepository {
     }
 
     private void updateNextId(int nextId) {
-        Configuration.getInstance().setProperty(Constantes.MED_RECORD_NEXT_ID, String.valueOf(nextId));
+        Configuration.getInstance().setProperty(Constants.MED_RECORD_NEXT_ID, String.valueOf(nextId));
     }
 
     private int getLastId() {
-        return Integer.parseInt(Configuration.getInstance().getProperty(Constantes.MED_RECORD_NEXT_ID));
+        return Integer.parseInt(Configuration.getInstance().getProperty(Constants.MED_RECORD_NEXT_ID));
     }
 
     @Override
