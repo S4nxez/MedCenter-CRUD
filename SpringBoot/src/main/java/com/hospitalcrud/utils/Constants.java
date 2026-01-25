@@ -11,6 +11,8 @@ public class Constants {
     public static final String DELETE_OPERATION_NOT_CONFIRMED = "Delete operation not confirmed";
     public static final String LOGIN_PATH = "/login";
     public static final String PATH_REFRESH_TOKEN = "/refresh-token";
+    public static final String PATH_DOCTOR = "/doctors";
+    public static final String PATIENTS_PATH = "/patients";
 
     public Constants() {
     }

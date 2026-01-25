@@ -2,6 +2,7 @@ package com.hospitalcrud.ui;
 
 import com.hospitalcrud.domain.model.PatientUI;
 import com.hospitalcrud.domain.services.PatientService;
+import com.hospitalcrud.utils.Constants;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ public class RestPatient {
         patientService.delete(idDelete, true);
     }
 
-    @PutMapping("/patients")
+    @PutMapping(Constants.PATIENTS_PATH)
    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody  PatientUI patientUI){
         patientService.update(patientUI);
