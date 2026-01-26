@@ -16,17 +16,17 @@ public class RestPatient {
         this.patientService=patientService;
     }
 
-    @GetMapping("/patients")
+    @GetMapping(Constants.PATIENTS_PATH)
     public List<PatientUI> get(){
         return patientService.get();
     }
 
-    @PostMapping("/patients")
+    @PostMapping(Constants.PATIENTS_PATH)
     public int add(@RequestBody  PatientUI patientUI){
         return patientService.add(patientUI);
     }
 
-    @DeleteMapping("/patients/{idDelete}")
+    @DeleteMapping(Constants.PATIENTS_PATH + "/{idDelete}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int idDelete, @RequestParam(required=false) boolean confirm){
         patientService.delete(idDelete, true);

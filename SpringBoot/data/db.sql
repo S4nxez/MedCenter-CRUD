@@ -59,7 +59,7 @@ CREATE TABLE patient_payments (
 CREATE TABLE user_login (
                             user_id INT NOT NULL AUTO_INCREMENT,
                             username VARCHAR(50) NOT NULL UNIQUE,
-                            password VARCHAR(100) NOT NULL,
+                            password VARCHAR(300) NOT NULL,
                             patient_id INT,
                             doctor_id INT,
                             PRIMARY KEY (user_id),
@@ -112,10 +112,10 @@ VALUES
 -- Inserting data into the user_login table
 INSERT INTO user_login (username, password, patient_id, doctor_id)
 VALUES
-    ('patient1', 'passwordp1', 1, NULL),
-    ('patient2', 'passwordp2', 2, NULL),
-    ('patient3', 'passwordp3', 3, NULL),
-    ('doctor1', 'passwordd1', NULL, 1),
-    ('doctor2', 'passwordd2', NULL, 2),
-    ('doctor3', 'passwordd3', NULL, 3),
-    ('root', 'quevedo2dam', NULL, NULL);
+    ('patient1', '1000:e343a3702fd017977adcc45a2aa3229d0c8526b06d5272ff59c3752b74b9ecf0716a93d0e0cd1f966b1425018d17192a:49a4a5b1469b871abcad4d4ad86511fb60f50891328ccba5da8d43989f3261b4fd58ff34648f5c940078d3c81c60b5ee', 1, NULL),
+    ('patient2', '1000:e343a3702fd017977adcc45a2aa3229d0c8526b06d5272ff59c3752b74b9ecf0716a93d0e0cd1f966b1425018d17192a:49a4a5b1469b871abcad4d4ad86511fb60f50891328ccba5da8d43989f3261b4fd58ff34648f5c940078d3c81c60b5ee', 2, NULL),
+    ('patient3', '1000:e343a3702fd017977adcc45a2aa3229d0c8526b06d5272ff59c3752b74b9ecf0716a93d0e0cd1f966b1425018d17192a:49a4a5b1469b871abcad4d4ad86511fb60f50891328ccba5da8d43989f3261b4fd58ff34648f5c940078d3c81c60b5ee', 3, NULL),
+    ('doctor1', '1000:e343a3702fd017977adcc45a2aa3229d0c8526b06d5272ff59c3752b74b9ecf0716a93d0e0cd1f966b1425018d17192a:49a4a5b1469b871abcad4d4ad86511fb60f50891328ccba5da8d43989f3261b4fd58ff34648f5c940078d3c81c60b5ee', NULL, 1),
+    ('doctor2', '1000:e343a3702fd017977adcc45a2aa3229d0c8526b06d5272ff59c3752b74b9ecf0716a93d0e0cd1f966b1425018d17192a:49a4a5b1469b871abcad4d4ad86511fb60f50891328ccba5da8d43989f3261b4fd58ff34648f5c940078d3c81c60b5ee', NULL, 2),
+    ('doctor3', '1000:e343a3702fd017977adcc45a2aa3229d0c8526b06d5272ff59c3752b74b9ecf0716a93d0e0cd1f966b1425018d17192a:49a4a5b1469b871abcad4d4ad86511fb60f50891328ccba5da8d43989f3261b4fd58ff34648f5c940078d3c81c60b5ee', NULL, 3),
+    ('root', '1000:e343a3702fd017977adcc45a2aa3229d0c8526b06d5272ff59c3752b74b9ecf0716a93d0e0cd1f966b1425018d17192a:49a4a5b1469b871abcad4d4ad86511fb60f50891328ccba5da8d43989f3261b4fd58ff34648f5c940078d3c81c60b5ee', NULL, NULL);
