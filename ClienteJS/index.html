@@ -15,10 +15,68 @@
 
     <script defer src="js/authService.js"></script>
     <script defer src="js/credentials.js"></script>
-  </head>
+
+    <style>
+      .postit {
+        background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+        border: 1px solid #f9a825;
+        border-radius: 4px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15), -1px 4px 6px rgba(249, 168, 37, 0.4);
+        padding: 15px;
+        width: 250px;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        font-size: 10px;
+        color: #333;
+        line-height: 1;
+        transform: rotate(-3deg);
+        z-index: 10;
+        margin-bottom: 30px;
+      }
+
+      /* Desktop: positioned absolutely to the right */
+      @media (min-width: 768px) {
+        .postit {
+          position: absolute;
+          top: 20px;
+          right: 40px;
+          margin-bottom: 0;
+        }
+      }
+
+      /* Mobile: below the title, full width friendly */
+      @media (max-width: 767px) {
+        .postit {
+          position: static;
+          width: 50%;
+          max-width: 150px;
+          margin: 0 auto 30px auto;
+        }
+      }
+      .postit-title {
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-decoration: underline;
+        margin-top: 10px;
+      }
+
+      .postit-item {
+        margin: 5px 0;
+      }
+    </style>
 
   <body class="container mt-5">
     <h2>Login</h2>
+
+    <!-- Post-it con credenciales -->
+    <div class="postit">
+      <div class="postit-title">Credenciales de Prueba</div>
+      <div class="postit-item"><strong>Users:</strong></div>
+      <div class="postit-item">• root</div>
+      <div class="postit-item">• patient1</div>
+      <div class="postit-item">• doctor1</div>
+      <div class="postit-item" style="margin-top: 10px;"><strong>Password:</strong></div>
+      <div class="postit-item">• root</div>
+    </div>
 
     <div class="row mb-3">
       <label for="username" class="col-sm-2 col-form-label">Username:</label>

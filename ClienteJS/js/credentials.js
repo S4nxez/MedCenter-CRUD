@@ -48,8 +48,3 @@ function getCredentials(u, p) {
       }
     });
 }
-
-function logout() {
-  authService.clearTokens();
-  window.location.href = "index.html";
-}
