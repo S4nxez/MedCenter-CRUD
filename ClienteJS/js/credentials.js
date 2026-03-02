@@ -1,11 +1,11 @@
 document.getElementById("bCheck").addEventListener("click", function (event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
 
-    getCredentials(username, password)
-})
+  getCredentials(username, password);
+});
 
 function getCredentials(u, p) {
   let cred = {
@@ -13,7 +13,7 @@ function getCredentials(u, p) {
     password: p,
   };
 
-  fetch("/api/login", {
+  fetch("http://localhost:8080/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -25,7 +25,8 @@ function getCredentials(u, p) {
         return response.json();
       } else {
         if (response.status === 401) {
-          document.getElementById("WrongCred").textContent = "Invalid credentials";
+          document.getElementById("WrongCred").textContent =
+            "Invalid credentials";
           throw new Error("Invalid credentials");
         }
         throw new Error("Network response was not ok.");
@@ -44,7 +45,8 @@ function getCredentials(u, p) {
     .catch((error) => {
       console.error("Error al realizar la solicitud:", error);
       if (!document.getElementById("WrongCred").textContent) {
-        document.getElementById("WrongCred").textContent = "Login error. Please try again.";
+        document.getElementById("WrongCred").textContent =
+          "Login error. Please try again.";
       }
     });
 }
