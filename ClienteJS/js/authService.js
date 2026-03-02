@@ -36,7 +36,7 @@ class AuthService {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/refresh-token?refreshToken=${encodeURIComponent(refreshToken)}`,
+        `/api/refresh-token?refreshToken=${encodeURIComponent(refreshToken)}`,
         {
           method: "POST",
           headers: {

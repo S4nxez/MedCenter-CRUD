@@ -13,7 +13,7 @@ function getCredentials(u, p) {
     password: p,
   };
 
-  fetch("http://localhost:8080/login", {
+  fetch("/api/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

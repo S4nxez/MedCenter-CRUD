@@ -1,7 +1,7 @@
 //GET ALL
 function getAllpatients() {
   authService
-    .fetchWithToken("http://localhost:8080/patients")
+    .fetchWithToken("/api/patients")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -34,15 +34,12 @@ function deletePatient(button) {
   function sendDeleteRequest(confirmation) {
     // Delete the patient from the server
     authService
-      .fetchWithToken(
-        `http://localhost:8080/patients/${patientId}?confirm=${confirmation}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
+      .fetchWithToken(`/api/patients/${patientId}?confirm=${confirmation}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
         },
-      )
+      })
       .then((response) => {
         if (response.status === 204) {
           // No content, successful deletion
@@ -169,7 +166,7 @@ function updatePatient(event) {
 
   // Send a fetch request to update the patient on the server
   authService
-    .fetchWithToken("http://localhost:8080/patients", {
+    .fetchWithToken("/api/patients", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
