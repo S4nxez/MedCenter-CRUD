@@ -13,7 +13,7 @@ function getCredentials(u, p) {
     password: p,
   };
 
-  fetch("/api/login", {
+  fetch("/med-center/api/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
