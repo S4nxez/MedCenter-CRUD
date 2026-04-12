@@ -11,11 +11,11 @@
 ![Tailscale](https://img.shields.io/badge/Tailscale-242424?style=for-the-badge&logo=tailscale&logoColor=white)
 ![Raspberry Pi](https://img.shields.io/badge/Raspberry_Pi-A22846?style=for-the-badge&logo=raspberry-pi&logoColor=white)
 <br>
-![Website](https://img.shields.io/website?url=https%3A%2F%2Fraspberrypi.tail0a4b52.ts.net&style=for-the-badge&label=Demo&up_message=online&down_message=offline)
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fraspberrypi.tail0a4b52.ts.net%2Fmed-center%2F&up_message=online&down_message=offline&style=for-the-badge&label=Demo)
 
 A full-stack medical center management system built with **Spring Boot**, **Vanilla JS**, and **MySQL** — containerized, secured with **JWT**, and deployed automatically to production via a fully automated **CI/CD pipeline** running on a **Raspberry Pi**.
 
-🌐 **Live demo:** [https://raspberrypi.tail0a4b52.ts.net/](https://raspberrypi.tail0a4b52.ts.net/)
+🌐 **Live demo:** [https://raspberrypi.tail0a4b52.ts.net/med-center](https://raspberrypi.tail0a4b52.ts.net/med-center)
 
 
 ---
